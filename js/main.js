@@ -139,6 +139,10 @@
     let boardTl = null;
     if (window.initBoardDemo) boardTl = window.initBoardDemo();
 
+    /* ---------- What's-new demos (chat + diff/revert) ---------- */
+    let wnTls = null;
+    if (window.initWhatsNewDemos) wnTls = window.initWhatsNewDemos();
+
     /* ---------- Generic scroll reveals ---------- */
     const revealEls = $$("[data-reveal]");
     revealEls.forEach((el) => gsap.set(el, { autoAlpha: 0, y: 26 }));
@@ -243,6 +247,7 @@
     /* ---------- cleanup on context revert ---------- */
     return () => {
       if (boardTl) boardTl.kill();
+      if (wnTls) wnTls.forEach((t) => t.kill());
     };
   });
 

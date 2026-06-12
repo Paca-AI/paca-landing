@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Paca — Humans and AI agents, one Scrum team</title>
-  <meta name="description" content="Paca is a free, self-hosted, open-source project management platform where AI agents plan sprints, pick up tasks, and ship alongside humans. The fully customizable alternative to Jira, Trello, ClickUp, and Monday." />
+  <meta name="description" content="Paca is a free, self-hosted, open-source project management platform where AI agents plan sprints, pick up tasks, and ship alongside humans. Chat with your project in plain English and revert any change in one click. The fully customizable alternative to Jira, Trello, ClickUp, and Monday." />
   <meta property="og:title" content="Paca — Humans and AI agents, one Scrum team" />
-  <meta property="og:description" content="AI-native, free, lightweight, open-source project management. Your AI agents get a seat at the table." />
+  <meta property="og:description" content="AI-native, free, lightweight, open-source project management. Your AI agents get a seat at the table. New in v0.4: in-app AI chat and one-click diff revert." />
   <meta property="og:type" content="website" />
   <link rel="icon" type="image/svg+xml" href="assets/paca-logo.svg" />
 
@@ -29,6 +29,7 @@
       <nav class="nav-links" aria-label="Primary">
         <a href="#why">Why Paca</a>
         <a href="#cycle">How it works</a>
+        <a href="#whats-new">What's new</a>
         <a href="#features">Features</a>
         <a href="#install">Install</a>
         <a href="#compare">Compare</a>
@@ -53,6 +54,7 @@
     <nav aria-label="Mobile">
       <a href="#why">Why Paca</a>
       <a href="#cycle">How it works</a>
+      <a href="#whats-new">What's new</a>
       <a href="#features">Features</a>
       <a href="#install">Install</a>
       <a href="#compare">Compare</a>
@@ -326,6 +328,112 @@
       </div>
     </section>
 
+    <!-- ====================== WHAT'S NEW (v0.4) ====================== -->
+    <section class="whatsnew section" id="whats-new">
+      <div class="container">
+        <div class="sec-head" data-reveal>
+          <span class="sec-kicker mono">New in v0.4.0</span>
+          <h2 class="sec-title">Talk to your project. <span class="dim">Undo anything.</span></h2>
+          <p class="sec-sub">Two new superpowers for human–AI teamwork: a project-level AI chat that turns
+          plain English into real work items, and an activity trail where every change can be reverted in one click.</p>
+        </div>
+
+        <div class="wn-grid">
+          <!-- In-app AI chat -->
+          <article class="wn-card" data-reveal>
+            <div class="wn-head">
+              <h3>In-app AI chat</h3>
+              <p>Chat with AI agents at the project level — plan work, then create or update epics,
+              stories, tasks, and docs in plain English. No tab-switching, no copy-paste.</p>
+            </div>
+            <div class="wn-visual chat-demo" id="chat-demo" aria-hidden="true">
+              <div class="chat-bar">
+                <span class="chat-title"><span class="mono">paca-core</span><span class="chat-label"><span class="board-sep">·</span>Project chat</span></span>
+                <span class="chat-online"><i></i>AGENT ONLINE</span>
+              </div>
+              <div class="chat-body">
+                <div class="chat-msg user" data-chat="q">
+                  <span class="avatar avatar-h1">M</span>
+                  <div class="chat-bubble">Plan next sprint around the OAuth epic — two weeks, include QA.</div>
+                </div>
+                <div class="chat-msg chat-typing" data-chat="typing">
+                  <span class="avatar avatar-ai">AI</span>
+                  <div class="chat-bubble"><span class="feed-dots"><i></i><i></i><i></i></span></div>
+                </div>
+                <div class="chat-msg" data-chat="a">
+                  <span class="avatar avatar-ai">AI</span>
+                  <div class="chat-bubble">
+                    Drafted <strong>Sprint 13</strong> — three items added to the backlog:
+                    <div class="chat-made">
+                      <span class="made-chip"><span class="mc-plus">+</span><span class="badge badge-story">Story</span><span class="mono">PACA-132</span><span class="mc-title">OAuth refresh tokens</span></span>
+                      <span class="made-chip"><span class="mc-plus">+</span><span class="badge badge-spec">Spec</span><span class="mono">PACA-133</span><span class="mc-title">PKCE edge cases</span></span>
+                      <span class="made-chip"><span class="mc-plus">+</span><span class="badge badge-chore">Chore</span><span class="mono">PACA-134</span><span class="mc-title">QA regression pass</span></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="chat-input">
+                <span>Message your project…</span>
+                <span class="chat-send"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Diff & revert -->
+          <article class="wn-card" data-reveal>
+            <div class="wn-head">
+              <h3>Diff &amp; revert any change</h3>
+              <p>Agents move fast — Paca keeps receipts. Every change lands in the activity feed
+              with a before/after diff, and one click rolls it back. Full speed, zero fear.</p>
+            </div>
+            <div class="wn-visual revert-demo" id="revert-demo" aria-hidden="true">
+              <div class="act-entry act-faded">
+                <div class="act-top">
+                  <span class="feed-ava hum">M</span>
+                  <span class="act-text">Mai moved <span class="mono">PACA-119</span> to Done</span>
+                  <span class="act-time mono">4m</span>
+                </div>
+              </div>
+              <div class="act-entry act-faded">
+                <div class="act-top">
+                  <span class="feed-ava ai">AI</span>
+                  <span class="act-text">Paca Agent created <span class="mono">PACA-132…134</span></span>
+                  <span class="act-time mono">2m</span>
+                </div>
+              </div>
+              <div class="act-entry act-main" id="act-main">
+                <div class="act-top">
+                  <span class="feed-ava ai">AI</span>
+                  <span class="act-text">Paca Agent updated <span class="mono">PACA-131</span></span>
+                  <span class="act-time mono">just now</span>
+                </div>
+                <div class="act-diff">
+                  <div class="diff-line diff-del" id="diff-del">
+                    <span class="d-sign" id="d-sign">−</span>
+                    <span class="d-field">due date</span>
+                    <span class="d-val">Jun 20</span>
+                  </div>
+                  <div class="diff-line diff-add" id="diff-add">
+                    <span class="d-sign">+</span>
+                    <span class="d-field">due date</span>
+                    <span class="d-val">Jun 27</span>
+                  </div>
+                </div>
+                <div class="act-foot">
+                  <span class="revert-btn" id="revert-btn">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                    <span id="revert-label">Revert</span>
+                  </span>
+                  <span class="revert-note mono">works for human edits, too</span>
+                </div>
+              </div>
+              <div class="revert-toast mono" id="revert-toast">↺ Change reverted — still logged in activity</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <!-- ====================== FEATURES BENTO ====================== -->
     <section class="features section" id="features">
       <div class="container">
@@ -542,6 +650,11 @@
                 <td class="cmp-paca-col">Human + AI, side by side on one board</td>
               </tr>
               <tr>
+                <th scope="row">Change safety</th>
+                <td>Buried audit logs — no undo</td>
+                <td class="cmp-paca-col">Before/after diffs, one-click revert</td>
+              </tr>
+              <tr>
                 <th scope="row">Hosting</th>
                 <td>Vendor cloud — your data, their servers</td>
                 <td class="cmp-paca-col">Self-hosted — you own everything</td>
@@ -650,6 +763,7 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Flip.min.js"></script>
   <script src="js/board-demo.js"></script>
+  <script src="js/whats-new.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

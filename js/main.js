@@ -73,6 +73,10 @@
   /* ============================================
      Motion (respects prefers-reduced-motion)
      ============================================ */
+
+  // P·A·C·A orbit — handles its own breakpoints & reduced motion
+  if (window.initCycle) window.initCycle();
+
   const mm = gsap.matchMedia();
 
   mm.add("(prefers-reduced-motion: no-preference)", () => {
@@ -159,52 +163,6 @@
           overwrite: true,
         }),
     });
-
-    /* ---------- P·A·C·A cycle ---------- */
-    const RING_LEN = 791.7; // 2πr, r = 126
-    const ringProg = $("#ring-prog");
-    const ringNodes = $$(".ring-node");
-    const phaseEls = $$(".phase");
-    const stepEl = $("#cycle-step");
-    const phaseNameEl = $("#cycle-phase");
-    let currentPhase = -1;
-
-    function setPhase(i) {
-      if (i === currentPhase || i < 0 || i > 3) return;
-      currentPhase = i;
-
-      if (ringProg) {
-        gsap.to(ringProg, {
-          strokeDashoffset: RING_LEN * (1 - (i + 1) / 4),
-          duration: 0.8,
-          ease: "power2.inOut",
-        });
-      }
-      ringNodes.forEach((n, idx) => n.classList.toggle("active", idx <= i));
-      phaseEls.forEach((p, idx) => p.classList.toggle("active", idx === i));
-
-      if (stepEl && phaseNameEl) {
-        stepEl.textContent = "0" + (i + 1) + " / 04";
-        const name = phaseEls[i].dataset.name;
-        gsap.fromTo(
-          phaseNameEl,
-          { autoAlpha: 0, y: 10 },
-          { autoAlpha: 1, y: 0, duration: 0.45, ease: "power2.out" }
-        );
-        phaseNameEl.textContent = name;
-      }
-    }
-
-    phaseEls.forEach((el, i) => {
-      ScrollTrigger.create({
-        trigger: el,
-        start: "top 62%",
-        end: "bottom 38%",
-        onEnter: () => setPhase(i),
-        onEnterBack: () => setPhase(i),
-      });
-    });
-    setPhase(0);
 
     /* ---------- Terminal typing ---------- */
     const CMD =

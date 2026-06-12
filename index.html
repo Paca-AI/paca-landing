@@ -282,47 +282,198 @@
           run by humans and agents together.</p>
         </div>
 
-        <div class="cycle-layout">
-          <div class="cycle-sticky">
-            <svg class="cycle-ring" viewBox="0 0 320 320" aria-hidden="true">
-              <circle class="ring-track" cx="160" cy="160" r="126" />
-              <circle class="ring-prog" id="ring-prog" cx="160" cy="160" r="126" transform="rotate(-90 160 160)" />
-              <g class="ring-node" data-node="0" transform="translate(160 34)"><circle r="17"/><text dy="5">P</text></g>
-              <g class="ring-node" data-node="1" transform="translate(286 160)"><circle r="17"/><text dy="5">A</text></g>
-              <g class="ring-node" data-node="2" transform="translate(160 286)"><circle r="17"/><text dy="5">C</text></g>
-              <g class="ring-node" data-node="3" transform="translate(34 160)"><circle r="17"/><text dy="5">A</text></g>
+        <!-- compact progress rail (mobile) -->
+        <div class="cycle-rail" aria-hidden="true">
+          <span class="rail-track"><span class="rail-fill" id="rail-fill"></span></span>
+          <span class="rail-node on" data-rail="0"><i>P</i><em>Plan</em></span>
+          <span class="rail-node on" data-rail="1"><i>A</i><em>Act</em></span>
+          <span class="rail-node on" data-rail="2"><i>C</i><em>Check</em></span>
+          <span class="rail-node on" data-rail="3"><i>A</i><em>Adapt</em></span>
+        </div>
+
+        <div class="cycle-stage">
+          <!-- ORBIT — the team runs the loop -->
+          <div class="cycle-orbit" id="cycle-orbit" aria-hidden="true">
+            <div class="orbit-wash"></div>
+            <svg class="cycle-ring" viewBox="0 0 460 460">
+              <circle class="ring-track" cx="230" cy="230" r="170" />
+              <circle class="ring-prog" id="ring-prog" cx="230" cy="230" r="170" transform="rotate(-90 230 230)" />
+              <g class="ring-comet" id="ring-comet" transform="translate(230 60)">
+                <circle class="comet-halo" r="14" />
+                <circle class="comet-mid" r="8.5" />
+                <circle class="comet-core" r="5" />
+              </g>
+              <text class="node-tag on" data-tag="0" x="230" y="103" text-anchor="middle">PLAN</text>
+              <text class="node-tag on" data-tag="1" x="362" y="234" text-anchor="end">ACT</text>
+              <text class="node-tag on" data-tag="2" x="230" y="364" text-anchor="middle">CHECK</text>
+              <text class="node-tag on" data-tag="3" x="98" y="234" text-anchor="start">ADAPT</text>
+              <g class="ring-node on" data-node="0" transform="translate(230 60)"><circle r="21"/><text dy="5.5">P</text></g>
+              <g class="ring-node on" data-node="1" transform="translate(400 230)"><circle r="21"/><text dy="5.5">A</text></g>
+              <g class="ring-node on" data-node="2" transform="translate(230 400)"><circle r="21"/><text dy="5.5">C</text></g>
+              <g class="ring-node on" data-node="3" transform="translate(60 230)"><circle r="21"/><text dy="5.5">A</text></g>
             </svg>
+            <div class="orbiter" data-orbiter="0"><span class="avatar avatar-ai">AI</span></div>
+            <div class="orbiter" data-orbiter="1"><span class="avatar avatar-h1">M</span></div>
+            <div class="orbiter" data-orbiter="2"><span class="avatar avatar-h2">T</span></div>
             <div class="cycle-center">
               <span class="cycle-step mono" id="cycle-step">01 / 04</span>
               <span class="cycle-phase" id="cycle-phase">Plan</span>
+              <span class="cycle-sub mono" id="cycle-sub">backlog → BDD specs</span>
             </div>
           </div>
 
-          <div class="cycle-list">
-            <article class="phase" data-phase="0" data-name="Plan">
-              <span class="phase-no mono">01</span>
-              <h3>Plan</h3>
-              <p>POs, BAs, and AI agents refine the backlog together. BDD scenarios and
+          <!-- PHASE PANELS — each with a micro-scene of the actual work -->
+          <div class="cycle-panels" id="cycle-panels">
+
+            <article class="cphase" data-phase="0" data-name="Plan" data-verb="backlog → BDD specs">
+              <header class="cphase-head">
+                <span class="cphase-no mono">01</span>
+                <h3>Plan</h3>
+              </header>
+              <p class="cphase-copy">POs, BAs, and AI agents refine the backlog together. BDD scenarios and
               SDD designs are written collaboratively — before a line of code.</p>
+              <div class="cscene scn-plan" aria-hidden="true">
+                <div class="scn-bar">
+                  <span class="board-dots"><span></span><span></span><span></span></span>
+                  <span class="scn-file mono">sprint-13-plan.md</span>
+                  <span class="scn-authors">
+                    <span class="avatar avatar-h1" data-author="m">M</span>
+                    <span class="avatar avatar-ai" data-author="ai">AI</span>
+                    <span class="scn-coedit mono">co-editing</span>
+                  </span>
+                </div>
+                <div class="scn-body scn-doc mono">
+                  <div class="doc-line"><span class="c-kw">Feature:</span> OAuth login with PKCE</div>
+                  <div class="doc-line">&nbsp;&nbsp;<span class="c-kw">Given</span> a returning user</div>
+                  <div class="doc-line">&nbsp;&nbsp;<span class="c-kw">When</span> the PKCE flow completes</div>
+                  <div class="doc-line">&nbsp;&nbsp;<span class="c-kw">Then</span> a session is created</div>
+                  <div class="scn-made">
+                    <span class="scn-chip"><span class="mc-plus">+</span><span class="badge badge-story">Story</span><span class="mono">PACA-132</span></span>
+                    <span class="scn-chip"><span class="mc-plus">+</span><span class="badge badge-spec">Spec</span><span class="mono">PACA-133</span></span>
+                  </div>
+                </div>
+              </div>
             </article>
-            <article class="phase" data-phase="1" data-name="Act">
-              <span class="phase-no mono">02</span>
-              <h3>Act</h3>
-              <p>Sprint is live. Humans and agents pull tasks from the same board,
+
+            <article class="cphase" data-phase="1" data-name="Act" data-verb="pull · build · ship">
+              <header class="cphase-head">
+                <span class="cphase-no mono">02</span>
+                <h3>Act</h3>
+              </header>
+              <p class="cphase-copy">Sprint is live. Humans and agents pull tasks from the same board,
               execute, and post updates the moment they happen.</p>
+              <div class="cscene scn-act" aria-hidden="true">
+                <div class="scn-bar">
+                  <span class="board-dots"><span></span><span></span><span></span></span>
+                  <span class="scn-file mono">sprint 13 · board</span>
+                  <span class="scn-live mono"><i></i>LIVE</span>
+                </div>
+                <div class="scn-body scn-cols">
+                  <div class="scn-col">
+                    <span class="scn-col-head mono">To Do</span>
+                    <div class="scn-slot" data-slot="todo">
+                      <div class="scn-card">
+                        <div class="scn-card-top"><span class="badge badge-spec">Spec</span><span class="scn-id mono">PACA-127</span></div>
+                        <div class="scn-card-meta"><span class="avatar avatar-empty"></span></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="scn-col">
+                    <span class="scn-col-head mono">In Progress</span>
+                    <div class="scn-slot" data-slot="doing">
+                      <div class="scn-card scn-card-live" id="scn-act-card">
+                        <div class="scn-card-top"><span class="badge badge-story">Story</span><span class="scn-id mono">PACA-128</span></div>
+                        <div class="scn-card-meta"><span class="scn-prog"><span class="scn-prog-fill" id="scn-act-fill"></span></span><span class="avatar avatar-ai" id="scn-act-ava">AI</span></div>
+                      </div>
+                      <div class="scn-card">
+                        <div class="scn-card-top"><span class="badge badge-bug">Bug</span><span class="scn-id mono">PACA-131</span></div>
+                        <div class="scn-card-meta"><span class="avatar avatar-h1">M</span></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="scn-col">
+                    <span class="scn-col-head mono">Done</span>
+                    <div class="scn-slot" data-slot="done">
+                      <div class="scn-card scn-card-done">
+                        <div class="scn-card-top"><span class="badge badge-chore">Chore</span><span class="scn-id mono">PACA-112</span></div>
+                        <div class="scn-card-meta"><span class="avatar avatar-h2">T</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </article>
-            <article class="phase" data-phase="2" data-name="Check">
-              <span class="phase-no mono">03</span>
-              <h3>Check</h3>
-              <p>QA agents run automated verification while humans review agent output.
+
+            <article class="cphase" data-phase="2" data-name="Check" data-verb="verify · review · trust">
+              <header class="cphase-head">
+                <span class="cphase-no mono">03</span>
+                <h3>Check</h3>
+              </header>
+              <p class="cphase-copy">QA agents run automated verification while humans review agent output.
               The board reflects reality — always.</p>
+              <div class="cscene scn-check" aria-hidden="true">
+                <div class="scn-bar">
+                  <span class="board-dots"><span></span><span></span><span></span></span>
+                  <span class="scn-file mono">qa-agent · verification</span>
+                </div>
+                <div class="scn-body scn-checks">
+                  <div class="check-row ok">
+                    <span class="check-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.5 5 5 10-11"/></svg></span>
+                    <span class="check-name mono">auth.spec.ts</span>
+                    <span class="check-meta mono">12 passed</span>
+                  </div>
+                  <div class="check-row ok">
+                    <span class="check-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.5 5 5 10-11"/></svg></span>
+                    <span class="check-name mono">board.spec.ts</span>
+                    <span class="check-meta mono">9 passed</span>
+                  </div>
+                  <div class="check-row ok">
+                    <span class="check-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.5 5 5 10-11"/></svg></span>
+                    <span class="check-name mono">e2e: sprint rollover</span>
+                    <span class="check-meta mono">4 passed</span>
+                  </div>
+                  <div class="check-row check-human ok">
+                    <span class="check-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.5 5 5 10-11"/></svg></span>
+                    <span class="check-name">Mai approved agent output</span>
+                    <span class="avatar avatar-h1">M</span>
+                  </div>
+                  <span class="scn-stamp mono" id="scn-stamp">✓ ALL CHECKS PASSED</span>
+                </div>
+              </div>
             </article>
-            <article class="phase" data-phase="3" data-name="Adapt">
-              <span class="phase-no mono">04</span>
-              <h3>Adapt</h3>
-              <p>Sprint data informs the next cycle. The whole team — human and AI —
+
+            <article class="cphase" data-phase="3" data-name="Adapt" data-verb="retro → next sprint">
+              <header class="cphase-head">
+                <span class="cphase-no mono">04</span>
+                <h3>Adapt</h3>
+              </header>
+              <p class="cphase-copy">Sprint data informs the next cycle. The whole team — human and AI —
               retrospects together and adjusts course.</p>
+              <div class="cscene scn-adapt" aria-hidden="true">
+                <div class="scn-bar">
+                  <span class="board-dots"><span></span><span></span><span></span></span>
+                  <span class="scn-file mono">retro · sprint 12 → 13</span>
+                </div>
+                <div class="scn-body scn-adapt-body">
+                  <div class="scn-bars">
+                    <span class="abar" style="--h:34%"></span>
+                    <span class="abar" style="--h:52%"></span>
+                    <span class="abar" style="--h:46%"></span>
+                    <span class="abar" style="--h:68%"></span>
+                    <span class="abar abar-next" style="--h:88%"></span>
+                    <svg class="scn-loop" viewBox="0 0 400 92" preserveAspectRatio="none" aria-hidden="true">
+                      <path id="scn-loop-path" d="M 364 30 C 322 2, 92 0, 40 28" fill="none" />
+                      <path id="scn-loop-head" d="M 52 19 40 28 54 33" fill="none" />
+                    </svg>
+                  </div>
+                  <div class="scn-next">
+                    <span class="scn-chip"><span class="mc-plus">↻</span><span class="mono">Sprint 13 planned</span></span>
+                    <span class="scn-foot mono">velocity ↑ · learnings feed the next Plan</span>
+                  </div>
+                </div>
+              </div>
             </article>
+
           </div>
         </div>
       </div>
@@ -764,6 +915,7 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Flip.min.js"></script>
   <script src="js/board-demo.js"></script>
   <script src="js/whats-new.js"></script>
+  <script src="js/cycle.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

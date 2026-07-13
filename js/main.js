@@ -143,7 +143,7 @@
     let boardTl = null;
     if (window.initBoardDemo) boardTl = window.initBoardDemo();
 
-    /* ---------- What's-new demos (chat + diff/revert) ---------- */
+    /* ---------- What's-new demos (workflow hand-off + MCP) ---------- */
     let wnTls = null;
     if (window.initWhatsNewDemos) wnTls = window.initWhatsNewDemos();
 

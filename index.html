@@ -6,7 +6,7 @@
   <title>Paca — Humans and AI agents, one Scrum team</title>
   <meta name="description" content="Paca is a free, self-hosted, open-source project management platform where AI agents plan sprints, pick up tasks, and ship alongside humans. Chat with your project in plain English and revert any change in one click. The fully customizable alternative to Jira, Trello, ClickUp, and Monday." />
   <meta property="og:title" content="Paca — Humans and AI agents, one Scrum team" />
-  <meta property="og:description" content="AI-native, free, lightweight, open-source project management. Your AI agents get a seat at the table. New in v0.4: in-app AI chat and one-click diff revert." />
+  <meta property="og:description" content="AI-native, free, lightweight, open-source project management. Your AI agents get a seat at the table. Latest: workspace branding, a visual automation engine, and ACP agent support." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://paca-ai.org/" />
   <meta property="og:image" content="https://paca-ai.org/assets/paca-logo-512.png" />
@@ -514,20 +514,169 @@
       </div>
     </section>
 
-    <!-- ====================== WHAT'S NEW (v0.4) ====================== -->
+    <!-- ====================== WHAT'S NEW ====================== -->
     <section class="whatsnew section" id="whats-new">
       <div class="container">
         <div class="sec-head" data-reveal>
-          <span class="sec-kicker mono">New in v0.4.0</span>
-          <h2 class="sec-title">Talk to your project. <span class="dim">Undo anything.</span></h2>
-          <p class="sec-sub">Two new superpowers for human–AI teamwork: a project-level AI chat that turns
-          plain English into real work items, and an activity trail where every change can be reverted in one click.</p>
+          <span class="sec-kicker mono">Latest releases</span>
+          <h2 class="sec-title">Ships fast. <span class="dim">Ships visibly.</span></h2>
+          <p class="sec-sub">Every release below is a real feature your team can use today — from a
+          visual automation engine to one-click workspace theming to plugging in any coding agent.</p>
         </div>
 
         <div class="wn-grid">
+          <!-- Event-driven automation engine -->
+          <article class="wn-card wn-card-wide" data-reveal>
+            <div class="wn-head">
+              <span class="wn-version mono">v0.11.0</span>
+              <h3>Event-driven automation engine</h3>
+              <p>A visual, n8n-style graph builder — compose Trigger → Condition → Action flows with
+              branching logic, nine built-in trigger types, and a step-by-step run history for every run.</p>
+            </div>
+            <div class="wn-visual automation-demo" id="automation-demo" aria-hidden="true">
+              <div class="auto-bar">
+                <span class="auto-bar-title"><span class="mono">flow</span><span class="board-sep">·</span>Due-date escalation</span>
+                <span class="auto-bar-status mono" id="auto-bar-status"><i></i>RUNNING</span>
+              </div>
+              <div class="auto-scroll">
+              <div class="auto-canvas" id="auto-canvas">
+                <div class="auto-grid"></div>
+                <svg class="auto-lines" id="auto-lines" aria-hidden="true">
+                  <path id="auto-path-trigger" />
+                  <path id="auto-path-true" />
+                  <path id="auto-path-else" />
+                  <text id="auto-label-true" class="auto-branch-label">true</text>
+                  <text id="auto-label-else" class="auto-branch-label">else</text>
+                  <circle id="auto-pulse" r="4" />
+                </svg>
+
+                <div class="auto-col">
+                  <div class="auto-node" id="auto-node-trigger">
+                    <span class="auto-ico auto-ico-trigger"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3 2"/></svg></span>
+                    <span class="auto-node-body">
+                      <span class="auto-kind mono">Trigger</span>
+                      <span class="auto-name">Due date −1d</span>
+                    </span>
+                    <i class="auto-port auto-port-out"></i>
+                  </div>
+                </div>
+
+                <div class="auto-col">
+                  <div class="auto-node" id="auto-node-cond">
+                    <i class="auto-port auto-port-in"></i>
+                    <span class="auto-ico auto-ico-cond"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 21 12 12 21 3 12Z"/></svg></span>
+                    <span class="auto-node-body">
+                      <span class="auto-kind mono">Condition</span>
+                      <span class="auto-name">Priority = High</span>
+                    </span>
+                    <i class="auto-port auto-port-out"></i>
+                  </div>
+                </div>
+
+                <div class="auto-col auto-col-branch">
+                  <div class="auto-node" id="auto-node-true">
+                    <i class="auto-port auto-port-in"></i>
+                    <span class="auto-ico auto-ico-agent"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="9" width="16" height="10" rx="2.5"/><path d="M12 9V5.5"/><circle cx="12" cy="4" r="1.3" fill="currentColor" stroke="none"/><path d="M8.5 14v1M15.5 14v1"/></svg></span>
+                    <span class="auto-node-body">
+                      <span class="auto-kind mono">Action</span>
+                      <span class="auto-name">Dispatch agent</span>
+                    </span>
+                    <span class="auto-run mono" id="auto-run-true">✓ ran</span>
+                  </div>
+                  <div class="auto-node" id="auto-node-else">
+                    <i class="auto-port auto-port-in"></i>
+                    <span class="auto-ico auto-ico-notify"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8.5a6 6 0 0 1 12 0c0 4.2 1.5 5.5 1.5 5.5h-15S6 12.7 6 8.5Z"/><path d="M9.5 17a2.5 2.5 0 0 0 5 0"/></svg></span>
+                    <span class="auto-node-body">
+                      <span class="auto-kind mono">Action</span>
+                      <span class="auto-name">Notify Slack</span>
+                    </span>
+                    <span class="auto-run mono" id="auto-run-else">✓ ran</span>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Workspace branding -->
+          <article class="wn-card" data-reveal>
+            <div class="wn-head">
+              <span class="wn-version mono">v0.12.0</span>
+              <h3>Workspace branding</h3>
+              <p>Upload a logo and favicon and pick an accent color — Paca applies matching light-
+              and dark-mode variants across buttons, the sidebar, and the login screen automatically.</p>
+            </div>
+            <div class="wn-visual branding-demo" id="branding-demo" aria-hidden="true">
+              <div class="brand-row">
+                <span class="brand-label mono">Accent color</span>
+                <div class="brand-swatches">
+                  <span class="brand-swatch is-active" data-swatch="lime" id="brand-swatch-lime"></span>
+                  <span class="brand-swatch" data-swatch="violet" id="brand-swatch-violet"></span>
+                  <span class="brand-swatch" data-swatch="sky" id="brand-swatch-sky"></span>
+                </div>
+              </div>
+              <div class="brand-preview">
+                <div class="bp-rail">
+                  <i class="bp-rail-dot"></i>
+                  <i class="bp-rail-dot bp-rail-active" id="bp-rail-active"></i>
+                  <i class="bp-rail-dot"></i>
+                </div>
+                <div class="bp-main">
+                  <span class="bp-line"></span>
+                  <span class="bp-line short"></span>
+                  <span class="bp-btn" id="bp-btn">Save changes</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ACP agent support -->
+          <article class="wn-card" data-reveal>
+            <div class="wn-head">
+              <span class="wn-version mono">v0.10.0</span>
+              <h3>ACP agent support</h3>
+              <p>Connect Claude Code, Codex, Gemini CLI, or any Agent Client Protocol server as a
+              Paca AI agent. A local bridge streams the conversation back over an authenticated
+              WebSocket — nothing is cloned into a cloud sandbox.</p>
+            </div>
+            <div class="wn-visual acp-demo" id="acp-demo" aria-hidden="true">
+              <div class="acp-panel">
+                <div class="acp-panel-head">
+                  <span class="acp-dots"><i></i><i></i><i></i></span>
+                  <span class="acp-panel-title mono">your machine <span class="board-sep">·</span> claude code</span>
+                </div>
+                <div class="acp-term">
+                  <div class="acp-cmd-line">
+                    <span class="acp-prompt mono">$</span>
+                    <span class="mono acp-cmd" id="acp-cmd">paca-acp-bridge start</span><span class="acp-cursor" id="acp-cursor"></span>
+                  </div>
+                  <div class="acp-out" id="acp-out-1"><span class="acp-ok">✓</span>authenticated <span class="acp-out-dim">· workspace</span> <span class="mono">paca-core</span></div>
+                  <div class="acp-out" id="acp-out-2"><span class="acp-ok">✓</span>session open <span class="acp-out-dim">· agent</span> <span class="mono">claude-code</span></div>
+                </div>
+              </div>
+
+              <div class="acp-bridge">
+                <span class="acp-bridge-line"><span class="acp-bridge-dot"></span></span>
+                <span class="acp-status mono is-live" id="acp-status"><i class="acp-status-dot"></i><span id="acp-status-label">connected</span></span>
+              </div>
+
+              <div class="acp-panel acp-panel-cloud">
+                <div class="acp-panel-head">
+                  <img class="acp-mark" src="assets/paca-logo.svg" width="13" height="13" alt="" aria-hidden="true">
+                  <span class="acp-panel-title mono">paca-core <span class="board-sep">·</span> PACA-118</span>
+                </div>
+                <div class="acp-msg" id="acp-msg">
+                  <span class="avatar avatar-ai">AI</span>
+                  <div class="chat-bubble" id="acp-bubble">Wired up — picking up <strong>PACA-118</strong> now.</div>
+                </div>
+              </div>
+            </div>
+          </article>
+
           <!-- In-app AI chat -->
           <article class="wn-card" data-reveal>
             <div class="wn-head">
+              <span class="wn-version mono">v0.4.0</span>
               <h3>In-app AI chat</h3>
               <p>Chat with AI agents at the project level — plan work, then create or update epics,
               stories, tasks, and docs in plain English. No tab-switching, no copy-paste.</p>
@@ -568,6 +717,7 @@
           <!-- Diff & revert -->
           <article class="wn-card" data-reveal>
             <div class="wn-head">
+              <span class="wn-version mono">v0.4.0</span>
               <h3>Diff &amp; revert any change</h3>
               <p>Agents move fast — Paca keeps receipts. Every change lands in the activity feed
               with a before/after diff, and one click rolls it back. Full speed, zero fear.</p>

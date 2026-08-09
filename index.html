@@ -6,7 +6,7 @@
   <title>Paca — Humans and AI agents, one Scrum team</title>
   <meta name="description" content="Paca is a free, self-hosted, open-source project management platform where AI agents plan sprints, pick up tasks, and ship alongside humans. Chat with your project in plain English and revert any change in one click. The fully customizable alternative to Jira, Trello, ClickUp, and Monday." />
   <meta property="og:title" content="Paca — Humans and AI agents, one Scrum team" />
-  <meta property="og:description" content="AI-native, free, lightweight, open-source project management. Your AI agents get a seat at the table. Automation workflows that hand work to humans and AI agents automatically." />
+  <meta property="og:description" content="AI-native, free, lightweight, open-source project management. Your AI agents get a seat at the table. Latest: workspace branding, a visual automation engine, and ACP agent support." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://paca-ai.org/" />
   <meta property="og:image" content="https://paca-ai.org/assets/paca-logo-512.png" />
@@ -515,105 +515,258 @@
       </div>
     </section>
 
-    <!-- ====================== WHAT'S NEW (v0.9) ====================== -->
+    <!-- ====================== WHAT'S NEW ====================== -->
     <section class="whatsnew section" id="whats-new">
       <div class="container">
         <div class="sec-head" data-reveal>
-          <span class="sec-kicker mono">New in v0.9.0</span>
-          <h2 class="sec-title">Hand-offs on autopilot. <span class="dim">Humans set the rules.</span></h2>
-          <p class="sec-sub">Meet automation workflows: chain tasks into a visual graph, and the moment one
-          step lands Paca hands the next one to the right human or AI agent — no manual reassignment between steps.</p>
+          <span class="sec-kicker mono">Latest releases</span>
+          <h2 class="sec-title">Ships fast. <span class="dim">Ships visibly.</span></h2>
+          <p class="sec-sub">Every release below is a real feature your team can use today — from a
+          visual automation engine to one-click workspace theming to plugging in any coding agent.</p>
         </div>
 
         <div class="wn-grid">
-          <!-- Automation workflows -->
-          <article class="wn-card" data-reveal>
+          <!-- Event-driven automation engine -->
+          <article class="wn-card wn-card-wide" data-reveal>
             <div class="wn-head">
-              <h3>Automation workflows</h3>
-              <p>Draw a dependency graph over your tasks in the new canvas builder. Status rules decide
-              who picks up each step — teammate or agent — and the engine reassigns work the instant a
-              status changes or a predecessor finishes.</p>
+              <span class="wn-version mono">v0.11.0</span>
+              <h3>Event-driven automation engine</h3>
+              <p>A visual, n8n-style graph builder — compose Trigger → Condition → Action flows with
+              branching logic, nine built-in trigger types, and a step-by-step run history for every run.</p>
             </div>
-            <div class="wn-visual flow-demo" id="flow-demo" aria-hidden="true">
-              <div class="wn-shell-bar">
-                <span class="board-dots"><span></span><span></span><span></span></span>
-                <span class="wn-shell-file mono">release-pipeline · workflow</span>
-                <span class="wn-live mono"><i></i>ACTIVE</span>
+            <div class="wn-visual automation-demo" id="automation-demo" aria-hidden="true">
+              <div class="auto-bar">
+                <span class="auto-bar-title"><span class="mono">flow</span><span class="board-sep">·</span>Due-date escalation</span>
+                <span class="auto-bar-status mono" id="auto-bar-status"><i></i>RUNNING</span>
               </div>
-              <div class="flow-body">
-                <div class="flow-node is-done" id="fn-1">
-                  <div class="fn-top">
-                    <span class="badge badge-spec">Spec</span>
-                    <span class="fn-id mono">PACA-141</span>
-                    <span class="fn-title">BDD: billing plans</span>
-                  </div>
-                  <div class="fn-meta">
-                    <span class="fn-prog"><span class="fn-prog-fill" id="fn1-fill" style="width:100%"></span></span>
-                    <span class="fn-status mono is-done" id="fn1-status">DONE ✓</span>
-                    <span class="avatar avatar-h1" id="fn1-ava">M</span>
-                  </div>
-                </div>
-                <div class="flow-link"><i id="fl1-fill"></i></div>
-                <div class="flow-node is-live" id="fn-2">
-                  <div class="fn-top">
-                    <span class="badge badge-story">Story</span>
-                    <span class="fn-id mono">PACA-142</span>
-                    <span class="fn-title">Billing API + UI</span>
-                  </div>
-                  <div class="fn-meta">
-                    <span class="fn-prog"><span class="fn-prog-fill" id="fn2-fill" style="width:62%"></span></span>
-                    <span class="fn-status mono is-doing" id="fn2-status">IN PROGRESS</span>
-                    <span class="avatar avatar-ai" id="fn2-ava">AI</span>
+              <div class="auto-scroll">
+              <div class="auto-canvas" id="auto-canvas">
+                <div class="auto-grid"></div>
+                <svg class="auto-lines" id="auto-lines" aria-hidden="true">
+                  <path id="auto-path-trigger" />
+                  <path id="auto-path-true" />
+                  <path id="auto-path-else" />
+                  <text id="auto-label-true" class="auto-branch-label">true</text>
+                  <text id="auto-label-else" class="auto-branch-label">else</text>
+                  <circle id="auto-pulse" r="4" />
+                </svg>
+
+                <div class="auto-col">
+                  <div class="auto-node" id="auto-node-trigger">
+                    <span class="auto-ico auto-ico-trigger"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3 2"/></svg></span>
+                    <span class="auto-node-body">
+                      <span class="auto-kind mono">Trigger</span>
+                      <span class="auto-name">Due date −1d</span>
+                    </span>
+                    <i class="auto-port auto-port-out"></i>
                   </div>
                 </div>
-                <div class="flow-link"><i id="fl2-fill"></i></div>
-                <div class="flow-node" id="fn-3">
-                  <div class="fn-top">
-                    <span class="badge badge-chore">Chore</span>
-                    <span class="fn-id mono">PACA-143</span>
-                    <span class="fn-title">QA regression pass</span>
-                  </div>
-                  <div class="fn-meta">
-                    <span class="fn-prog"><span class="fn-prog-fill" id="fn3-fill"></span></span>
-                    <span class="fn-status mono" id="fn3-status">QUEUED</span>
-                    <span class="avatar avatar-ai" id="fn3-ava">QA</span>
+
+                <div class="auto-col">
+                  <div class="auto-node" id="auto-node-cond">
+                    <i class="auto-port auto-port-in"></i>
+                    <span class="auto-ico auto-ico-cond"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 21 12 12 21 3 12Z"/></svg></span>
+                    <span class="auto-node-body">
+                      <span class="auto-kind mono">Condition</span>
+                      <span class="auto-name">Priority = High</span>
+                    </span>
+                    <i class="auto-port auto-port-out"></i>
                   </div>
                 </div>
-                <div class="flow-rule mono on" id="flow-rule">status rule · next step → auto-assign</div>
+
+                <div class="auto-col auto-col-branch">
+                  <div class="auto-node" id="auto-node-true">
+                    <i class="auto-port auto-port-in"></i>
+                    <span class="auto-ico auto-ico-agent"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="9" width="16" height="10" rx="2.5"/><path d="M12 9V5.5"/><circle cx="12" cy="4" r="1.3" fill="currentColor" stroke="none"/><path d="M8.5 14v1M15.5 14v1"/></svg></span>
+                    <span class="auto-node-body">
+                      <span class="auto-kind mono">Action</span>
+                      <span class="auto-name">Dispatch agent</span>
+                    </span>
+                    <span class="auto-run mono" id="auto-run-true">✓ ran</span>
+                  </div>
+                  <div class="auto-node" id="auto-node-else">
+                    <i class="auto-port auto-port-in"></i>
+                    <span class="auto-ico auto-ico-notify"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8.5a6 6 0 0 1 12 0c0 4.2 1.5 5.5 1.5 5.5h-15S6 12.7 6 8.5Z"/><path d="M9.5 17a2.5 2.5 0 0 0 5 0"/></svg></span>
+                    <span class="auto-node-body">
+                      <span class="auto-kind mono">Action</span>
+                      <span class="auto-name">Notify Slack</span>
+                    </span>
+                    <span class="auto-run mono" id="auto-run-else">✓ ran</span>
+                  </div>
+                </div>
+              </div>
               </div>
             </div>
           </article>
 
-          <!-- Agents manage workflows over MCP -->
+          <!-- Workspace branding -->
           <article class="wn-card" data-reveal>
             <div class="wn-head">
-              <h3>Agents wire it up themselves</h3>
-              <p>18 new MCP tools let agents create, connect, and activate workflows on their own.
-              And graphs stay editable while a workflow is live — reroute a running pipeline
-              without stopping it.</p>
+              <span class="wn-version mono">v0.12.0</span>
+              <h3>Workspace branding</h3>
+              <p>Upload a logo and favicon and pick an accent color — Paca applies matching light-
+              and dark-mode variants across buttons, the sidebar, and the login screen automatically.</p>
             </div>
-            <div class="wn-visual mcp-demo" id="mcp-demo" aria-hidden="true">
-              <div class="wn-shell-bar">
-                <span class="board-dots"><span></span><span></span><span></span></span>
-                <span class="wn-shell-file mono">claude · paca-mcp</span>
-                <span class="wn-live mono"><i></i>AGENT ONLINE</span>
+            <div class="wn-visual branding-demo" id="branding-demo" aria-hidden="true">
+              <div class="brand-row">
+                <span class="brand-label mono">Accent color</span>
+                <div class="brand-swatches">
+                  <span class="brand-swatch is-active" data-swatch="lime" id="brand-swatch-lime"></span>
+                  <span class="brand-swatch" data-swatch="violet" id="brand-swatch-violet"></span>
+                  <span class="brand-swatch" data-swatch="sky" id="brand-swatch-sky"></span>
+                </div>
               </div>
-              <div class="mcp-body mono">
-                <div class="mcp-line"><span class="mcp-arrow">→</span><span class="mcp-tool">create_workflow</span><span class="mcp-arg">"release-pipeline"</span><span class="mcp-ok">✓</span></div>
-                <div class="mcp-line"><span class="mcp-arrow">→</span><span class="mcp-tool">add_workflow_node</span><span class="mcp-arg">× 3 tasks</span><span class="mcp-ok">✓</span></div>
-                <div class="mcp-line"><span class="mcp-arrow">→</span><span class="mcp-tool">add_workflow_status_rule</span><span class="mcp-arg">review → qa-agent</span><span class="mcp-ok">✓</span></div>
-                <div class="mcp-line"><span class="mcp-arrow">→</span><span class="mcp-tool">activate_workflow</span><span class="mcp-arg"></span><span class="mcp-ok">✓</span></div>
-                <div class="mcp-toast" id="mcp-toast">⚡ release-pipeline is live — editable while running</div>
+              <div class="brand-preview">
+                <div class="bp-rail">
+                  <i class="bp-rail-dot"></i>
+                  <i class="bp-rail-dot bp-rail-active" id="bp-rail-active"></i>
+                  <i class="bp-rail-dot"></i>
+                </div>
+                <div class="bp-main">
+                  <span class="bp-line"></span>
+                  <span class="bp-line short"></span>
+                  <span class="bp-btn" id="bp-btn">Save changes</span>
+                </div>
               </div>
             </div>
           </article>
-        </div>
 
-        <div class="wn-also" data-reveal>
-          <span class="wn-also-label mono">Also in v0.9.0</span>
-          <span class="wn-also-chip">Smarter AI chat — cleaner tool calls, clearer errors</span>
-          <span class="wn-also-chip">Edit workflow graphs while they're active</span>
-          <span class="wn-also-chip">PATCH updates preserve omitted fields</span>
+          <!-- ACP agent support -->
+          <article class="wn-card" data-reveal>
+            <div class="wn-head">
+              <span class="wn-version mono">v0.10.0</span>
+              <h3>ACP agent support</h3>
+              <p>Connect Claude Code, Codex, Gemini CLI, or any Agent Client Protocol server as a
+              Paca AI agent. A local bridge streams the conversation back over an authenticated
+              WebSocket — nothing is cloned into a cloud sandbox.</p>
+            </div>
+            <div class="wn-visual acp-demo" id="acp-demo" aria-hidden="true">
+              <div class="acp-panel">
+                <div class="acp-panel-head">
+                  <span class="acp-dots"><i></i><i></i><i></i></span>
+                  <span class="acp-panel-title mono">your machine <span class="board-sep">·</span> claude code</span>
+                </div>
+                <div class="acp-term">
+                  <div class="acp-cmd-line">
+                    <span class="acp-prompt mono">$</span>
+                    <span class="mono acp-cmd" id="acp-cmd">paca-acp-bridge start</span><span class="acp-cursor" id="acp-cursor"></span>
+                  </div>
+                  <div class="acp-out" id="acp-out-1"><span class="acp-ok">✓</span>authenticated <span class="acp-out-dim">· workspace</span> <span class="mono">paca-core</span></div>
+                  <div class="acp-out" id="acp-out-2"><span class="acp-ok">✓</span>session open <span class="acp-out-dim">· agent</span> <span class="mono">claude-code</span></div>
+                </div>
+              </div>
+
+              <div class="acp-bridge">
+                <span class="acp-bridge-line"><span class="acp-bridge-dot"></span></span>
+                <span class="acp-status mono is-live" id="acp-status"><i class="acp-status-dot"></i><span id="acp-status-label">connected</span></span>
+              </div>
+
+              <div class="acp-panel acp-panel-cloud">
+                <div class="acp-panel-head">
+                  <img class="acp-mark" src="assets/paca-logo.svg" width="13" height="13" alt="" aria-hidden="true">
+                  <span class="acp-panel-title mono">paca-core <span class="board-sep">·</span> PACA-118</span>
+                </div>
+                <div class="acp-msg" id="acp-msg">
+                  <span class="avatar avatar-ai">AI</span>
+                  <div class="chat-bubble" id="acp-bubble">Wired up — picking up <strong>PACA-118</strong> now.</div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- In-app AI chat -->
+          <article class="wn-card" data-reveal>
+            <div class="wn-head">
+              <span class="wn-version mono">v0.4.0</span>
+              <h3>In-app AI chat</h3>
+              <p>Chat with AI agents at the project level — plan work, then create or update epics,
+              stories, tasks, and docs in plain English. No tab-switching, no copy-paste.</p>
+            </div>
+            <div class="wn-visual chat-demo" id="chat-demo" aria-hidden="true">
+              <div class="chat-bar">
+                <span class="chat-title"><span class="mono">paca-core</span><span class="chat-label"><span class="board-sep">·</span>Project chat</span></span>
+                <span class="chat-online"><i></i>AGENT ONLINE</span>
+              </div>
+              <div class="chat-body">
+                <div class="chat-msg user" data-chat="q">
+                  <span class="avatar avatar-h1">M</span>
+                  <div class="chat-bubble">Plan next sprint around the OAuth epic — two weeks, include QA.</div>
+                </div>
+                <div class="chat-msg chat-typing" data-chat="typing">
+                  <span class="avatar avatar-ai">AI</span>
+                  <div class="chat-bubble"><span class="feed-dots"><i></i><i></i><i></i></span></div>
+                </div>
+                <div class="chat-msg" data-chat="a">
+                  <span class="avatar avatar-ai">AI</span>
+                  <div class="chat-bubble">
+                    Drafted <strong>Sprint 13</strong> — three items added to the backlog:
+                    <div class="chat-made">
+                      <span class="made-chip"><span class="mc-plus">+</span><span class="badge badge-story">Story</span><span class="mono">PACA-132</span><span class="mc-title">OAuth refresh tokens</span></span>
+                      <span class="made-chip"><span class="mc-plus">+</span><span class="badge badge-spec">Spec</span><span class="mono">PACA-133</span><span class="mc-title">PKCE edge cases</span></span>
+                      <span class="made-chip"><span class="mc-plus">+</span><span class="badge badge-chore">Chore</span><span class="mono">PACA-134</span><span class="mc-title">QA regression pass</span></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="chat-input">
+                <span>Message your project…</span>
+                <span class="chat-send"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Diff & revert -->
+          <article class="wn-card" data-reveal>
+            <div class="wn-head">
+              <span class="wn-version mono">v0.4.0</span>
+              <h3>Diff &amp; revert any change</h3>
+              <p>Agents move fast — Paca keeps receipts. Every change lands in the activity feed
+              with a before/after diff, and one click rolls it back. Full speed, zero fear.</p>
+            </div>
+            <div class="wn-visual revert-demo" id="revert-demo" aria-hidden="true">
+              <div class="act-entry act-faded">
+                <div class="act-top">
+                  <span class="feed-ava hum">M</span>
+                  <span class="act-text">Mai moved <span class="mono">PACA-119</span> to Done</span>
+                  <span class="act-time mono">4m</span>
+                </div>
+              </div>
+              <div class="act-entry act-faded">
+                <div class="act-top">
+                  <span class="feed-ava ai">AI</span>
+                  <span class="act-text">Paca Agent created <span class="mono">PACA-132…134</span></span>
+                  <span class="act-time mono">2m</span>
+                </div>
+              </div>
+              <div class="act-entry act-main" id="act-main">
+                <div class="act-top">
+                  <span class="feed-ava ai">AI</span>
+                  <span class="act-text">Paca Agent updated <span class="mono">PACA-131</span></span>
+                  <span class="act-time mono">just now</span>
+                </div>
+                <div class="act-diff">
+                  <div class="diff-line diff-del" id="diff-del">
+                    <span class="d-sign" id="d-sign">−</span>
+                    <span class="d-field">due date</span>
+                    <span class="d-val">Jun 20</span>
+                  </div>
+                  <div class="diff-line diff-add" id="diff-add">
+                    <span class="d-sign">+</span>
+                    <span class="d-field">due date</span>
+                    <span class="d-val">Jun 27</span>
+                  </div>
+                </div>
+                <div class="act-foot">
+                  <span class="revert-btn" id="revert-btn">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                    <span id="revert-label">Revert</span>
+                  </span>
+                  <span class="revert-note mono">works for human edits, too</span>
+                </div>
+              </div>
+              <div class="revert-toast mono" id="revert-toast">↺ Change reverted — still logged in activity</div>
+            </div>
+          </article>
         </div>
       </div>
     </section>

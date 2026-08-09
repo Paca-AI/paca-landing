@@ -1388,6 +1388,48 @@ body.menu-open .mobile-menu { display: flex; }
 }
 
 /* ============================================================
+   RELEASE NOTES
+   ============================================================ */
+.cl-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line);
+}
+
+.cl-item {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 28px;
+  padding: 28px 4px;
+  border-bottom: 1px solid var(--line);
+}
+
+.cl-item-featured { grid-template-columns: 160px 1fr 240px; align-items: center; }
+
+.cl-meta { display: flex; flex-direction: column; gap: 6px; }
+.cl-version { font-size: 15px; font-weight: 700; letter-spacing: -0.01em; }
+.cl-date { font-size: 11px; letter-spacing: 0.04em; color: var(--muted-fg); }
+
+.cl-body h3 { font-size: 16.5px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 8px; }
+.cl-body p { font-size: 13.8px; line-height: 1.64; color: var(--muted-fg); max-width: 62ch; }
+
+.cl-thumb {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 14px 40px -18px rgba(0, 0, 0, 0.55);
+}
+
+.cl-more { margin-top: 28px; text-align: center; font-size: 12.5px; }
+.cl-more a {
+  color: var(--lime);
+  border-bottom: 1px solid rgba(158, 217, 87, 0.3);
+  padding-bottom: 1px;
+  transition: border-color 0.2s ease;
+}
+.cl-more a:hover { border-color: var(--lime); }
+
+/* ============================================================
    BENTO FEATURES
    ============================================================ */
 .bento {
@@ -1872,6 +1914,8 @@ body.menu-open .mobile-menu { display: flex; }
   .why-grid { grid-template-columns: 1fr; }
   .board-feed { display: none; }
   .wn-grid { grid-template-columns: 1fr; }
+  .cl-item { grid-template-columns: 100px 1fr; gap: 18px; }
+  .cl-item-featured { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 640px) {
@@ -1912,6 +1956,9 @@ body.menu-open .mobile-menu { display: flex; }
 
   .footer-grid { grid-template-columns: 1fr; gap: 28px; }
   .footer-base { flex-direction: column; align-items: flex-start; }
+
+  .cl-item { grid-template-columns: 1fr; gap: 10px; padding: 20px 2px; }
+  .cl-meta { flex-direction: row; gap: 10px; align-items: baseline; }
 }
 
 /* ============================================================

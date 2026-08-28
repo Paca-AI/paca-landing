@@ -639,10 +639,13 @@ body.menu-open .mobile-menu { display: flex; }
   transition: opacity 0.15s ease;
 }
 .strip-sponsors a:hover { opacity: 1; }
+.strip-sponsors svg,
+.strip-sponsors img { height: 32px; width: auto; }
 .sponsor-virtuals { gap: 9px; font-size: 13px; font-weight: 600; color: var(--muted-fg); }
 .sponsor-virtuals img { border-radius: 6px; }
 .sponsor-virtuals:hover { color: var(--fg); }
 .sponsor-neon svg { display: block; border-radius: 4px; }
+.sponsor-aws svg { display: block; border-radius: 4px; }
 
 /* ============================================================
    SECTION HEADINGS

@@ -1,7 +1,9 @@
 /* ============================================================
-   Paca Landing — "What's new in v0.4" demos
-   Two looping GSAP timelines: the project-level AI chat and
-   the activity diff + one-click revert. Initialized from
+   Paca Landing — "What's new" release demos
+   Looping GSAP timelines, one per release card: the browser
+   extension, provider_cli agents, static environments, the
+   automation engine, branding, ACP, the project-level AI chat
+   and the activity diff + one-click revert. Initialized from
    main.js only when motion is allowed; without JS or with
    reduced motion the markup reads as a finished static shot.
    ============================================================ */
@@ -120,6 +122,259 @@ window.initWhatsNewDemos = function initWhatsNewDemos() {
 
     timelines.push(tl);
     playWhileVisible(demo, tl);
+  }
+
+  /* ---------- browser extension: page annotations ---------- */
+  const ext = $("#ext-demo");
+  if (ext) {
+    const page = $(".ext-page", ext);
+    const cursor = $("#ext-cursor", ext);
+    const target = $("#ext-target", ext);
+    const pin = $("#ext-pin", ext);
+    const pinLabel = $("#ext-pin-label", ext);
+    const popover = $("#ext-popover", ext);
+    const text = $("#ext-text", ext);
+    const caret = $("#ext-caret", ext);
+    const create = $("#ext-create", ext);
+    const createLabel = $("#ext-create-label", ext);
+    const toast = $("#ext-toast", ext);
+    const openCount = $("#ext-open-count", ext);
+    const COMMENT = text.textContent;
+
+    // the cursor travels to the button's real rendered position, so the click lands
+    // on the element at any card width
+    function cursorTargetPos() {
+      const p = page.getBoundingClientRect();
+      const t = target.getBoundingClientRect();
+      return { left: t.left - p.left + t.width * 0.62, top: t.top - p.top + t.height * 0.55 };
+    }
+
+    // the pin hangs off the button's top-right corner; measured, for the same reason
+    function pinPos() {
+      const p = page.getBoundingClientRect();
+      const t = target.getBoundingClientRect();
+      return { left: t.right - p.left - 9, top: t.top - p.top - 15 };
+    }
+
+    function resetExt() {
+      const pp = pinPos();
+      pin.style.left = pp.left + "px";
+      pin.style.top = pp.top + "px";
+      target.classList.remove("is-hover");
+      pin.classList.remove("is-done");
+      pinLabel.textContent = "1";
+      create.classList.remove("is-hot");
+      createLabel.textContent = "Create task";
+      openCount.textContent = "3";
+      text.textContent = "";
+      gsap.set(cursor, { autoAlpha: 0, left: "66%", top: "22%", scale: 1 });
+      gsap.set(pin, { autoAlpha: 0, scale: 0.5, y: -8 });
+      gsap.set(popover, { autoAlpha: 0, y: 8 });
+      gsap.set(caret, { autoAlpha: 0 });
+      gsap.set(toast, { autoAlpha: 0, y: 10 });
+    }
+    resetExt();
+
+    const tl = gsap.timeline({
+      repeat: -1,
+      repeatDelay: 1.1,
+      paused: true,
+      defaults: { ease: "power2.out" },
+      // re-measure the button on every pass so the click still lands after a resize
+      onRepeat: () => tl.invalidate(),
+    });
+
+    const typeProxy = { i: 0 };
+    // 1 — the cursor drifts onto the CTA, 2 — click drops a pin and opens the comment box,
+    // 3 — Mai types, 4 — one click turns it into a task, 5 — fade and reset for the loop
+    tl.to(cursor, { autoAlpha: 1, duration: 0.25 }, 0.3)
+      .to(cursor, {
+        left: () => cursorTargetPos().left,
+        top: () => cursorTargetPos().top,
+        duration: 1.0,
+        ease: "power2.inOut",
+      }, 0.35)
+      .call(() => target.classList.add("is-hover"), null, 1.2)
+      .to(cursor, { scale: 0.82, duration: 0.1, yoyo: true, repeat: 1 }, 1.45)
+      .to(pin, { autoAlpha: 1, scale: 1, y: 0, duration: 0.45, ease: "back.out(2.2)" }, 1.55)
+      .to(cursor, { autoAlpha: 0, duration: 0.3 }, 1.75)
+      .to(popover, { autoAlpha: 1, y: 0, duration: 0.4 }, 1.85)
+      .set(caret, { autoAlpha: 1 }, 2.0)
+      .to(typeProxy, {
+        i: COMMENT.length,
+        duration: 1.6,
+        ease: "none",
+        onUpdate: () => { text.textContent = COMMENT.slice(0, Math.round(typeProxy.i)); },
+      }, 2.2)
+      .set(caret, { autoAlpha: 0 }, 4.1)
+      .call(() => create.classList.add("is-hot"), null, 4.4)
+      .to(create, { scale: 0.94, duration: 0.12, yoyo: true, repeat: 1 }, 4.45)
+      .call(() => { createLabel.textContent = "Created ✓"; }, null, 4.7)
+      .call(() => { pin.classList.add("is-done"); pinLabel.textContent = "✓"; openCount.textContent = "4"; }, null, 4.95)
+      .to(popover, { autoAlpha: 0, y: -6, duration: 0.35, ease: "power2.in" }, 5.05)
+      .to(toast, { autoAlpha: 1, y: 0, duration: 0.45, ease: "back.out(1.6)" }, 5.2)
+      .to(toast, { autoAlpha: 0, y: 6, duration: 0.35, ease: "power2.in" }, 8.4)
+      .to(pin, { autoAlpha: 0, scale: 0.6, duration: 0.3, ease: "power2.in" }, 8.4)
+      .call(() => { target.classList.remove("is-hover"); typeProxy.i = 0; }, null, 8.5)
+      .call(resetExt, null, 8.85)
+      .set({}, {}, 9.1); // pad the loop end
+
+    timelines.push(tl);
+    playWhileVisible(ext, tl);
+  }
+
+  /* ---------- provider_cli agent type ---------- */
+  const cli = $("#cli-demo");
+  if (cli) {
+    const tiles = Array.from(cli.querySelectorAll(".cli-tile"));
+    const cmdEl = $("#cli-cmd", cli);
+    const cursor = $("#cli-cursor", cli);
+    const out1 = $("#cli-out-1", cli);
+    const out2 = $("#cli-out-2", cli);
+    const CLIS = [
+      { key: "claude", cmd: "claude /login" },
+      { key: "codex", cmd: "codex login" },
+      { key: "gemini", cmd: "gemini /auth" },
+      { key: "cursor", cmd: "cursor-agent login" },
+    ];
+
+    function selectCli(key) {
+      tiles.forEach((t) => t.classList.toggle("is-active", t.dataset.cli === key));
+    }
+
+    function resetCli() {
+      selectCli(CLIS[0].key);
+      cmdEl.textContent = "";
+      gsap.set(cursor, { autoAlpha: 1 });
+      gsap.set([out1, out2], { autoAlpha: 0, y: 4 });
+    }
+    resetCli();
+
+    const tl = gsap.timeline({
+      repeat: -1,
+      repeatDelay: 0.6,
+      paused: true,
+      defaults: { ease: "power2.out" },
+    });
+
+    // one pass per CLI: pick the tile, type its login command once, then the
+    // environment reports the persisted login and the synced MCP servers
+    const PASS = 4.4;
+    CLIS.forEach((c, i) => {
+      const t0 = i * PASS;
+      const proxy = { i: 0 };
+      tl.call(() => {
+          selectCli(c.key);
+          cmdEl.textContent = "";
+          proxy.i = 0;
+        }, null, t0)
+        .set(cursor, { autoAlpha: 1 }, t0)
+        .to(proxy, {
+          i: c.cmd.length,
+          duration: 0.6,
+          ease: "none",
+          onUpdate: () => { cmdEl.textContent = c.cmd.slice(0, Math.round(proxy.i)); },
+        }, t0 + 0.35)
+        .to(cursor, { autoAlpha: 0, duration: 0.15 }, t0 + 1.05)
+        .to(out1, { autoAlpha: 1, y: 0, duration: 0.35 }, t0 + 1.35)
+        .to(out2, { autoAlpha: 1, y: 0, duration: 0.35 }, t0 + 1.9)
+        .to([out1, out2], { autoAlpha: 0, y: 4, duration: 0.3, ease: "power2.in" }, t0 + PASS - 0.55);
+    });
+    tl.call(resetCli, null, CLIS.length * PASS - 0.2)
+      .set({}, {}, CLIS.length * PASS); // pad the loop end
+
+    timelines.push(tl);
+    playWhileVisible(cli, tl);
+  }
+
+  /* ---------- static environments ---------- */
+  const env = $("#env-demo");
+  if (env) {
+    const tabs = {
+      terminal: { tab: $("#env-tab-terminal", env), pane: $("#env-pane-terminal", env) },
+      ssh: { tab: $("#env-tab-ssh", env), pane: $("#env-pane-ssh", env) },
+      ports: { tab: $("#env-tab-ports", env), pane: $("#env-pane-ports", env) },
+    };
+    const cmdEl = $("#env-cmd", env);
+    const cursor = $("#env-cursor", env);
+    const out1 = $("#env-out-1", env);
+    const out2 = $("#env-out-2", env);
+    const sshKey = $("#env-ssh-key", env);
+    const sshCmd = $("#env-ssh-cmd", env);
+    const sshCursor = $("#env-ssh-cursor", env);
+    const sshOut = $("#env-ssh-out", env);
+    const port1 = $("#env-port-1", env);
+    const port2 = $("#env-port-2", env);
+    const portAdd = $("#env-port-add", env);
+    const CMD = "npm run dev";
+    const SSH = "ssh dev-box";
+
+    function showTab(name) {
+      Object.keys(tabs).forEach((k) => {
+        tabs[k].tab.classList.toggle("is-active", k === name);
+        tabs[k].pane.classList.toggle("is-active", k === name);
+      });
+      gsap.fromTo(tabs[name].pane, { autoAlpha: 0, y: 5 }, { autoAlpha: 1, y: 0, duration: 0.3, ease: "power2.out" });
+    }
+
+    function resetEnv() {
+      Object.keys(tabs).forEach((k) => {
+        tabs[k].tab.classList.toggle("is-active", k === "terminal");
+        tabs[k].pane.classList.toggle("is-active", k === "terminal");
+      });
+      gsap.set(tabs.terminal.pane, { clearProps: "opacity,visibility,transform" });
+      cmdEl.textContent = "";
+      sshCmd.textContent = "";
+      gsap.set([cursor, sshCursor], { autoAlpha: 1 });
+      gsap.set([out1, out2, sshOut], { autoAlpha: 0, y: 4 });
+      gsap.set(sshKey, { autoAlpha: 0, y: 4 });
+      gsap.set([port1, port2, portAdd], { autoAlpha: 0, x: -8 });
+    }
+    resetEnv();
+
+    const tl = gsap.timeline({
+      repeat: -1,
+      repeatDelay: 0.8,
+      paused: true,
+      defaults: { ease: "power2.out" },
+    });
+
+    const typeA = { i: 0 };
+    const typeB = { i: 0 };
+    // 1 — terminal: start a dev server that outlives the chat, 2 — SSH: an authorized key
+    // and a real shell into the same box, 3 — ports: forward 3000 for a live preview, 4 — reset
+    tl.to(typeA, {
+        i: CMD.length,
+        duration: 0.55,
+        ease: "none",
+        onUpdate: () => { cmdEl.textContent = CMD.slice(0, Math.round(typeA.i)); },
+      }, 0.4)
+      .to(cursor, { autoAlpha: 0, duration: 0.15 }, 1.0)
+      .to(out1, { autoAlpha: 1, y: 0, duration: 0.35 }, 1.35)
+      .to(out2, { autoAlpha: 1, y: 0, duration: 0.35 }, 2.0)
+
+      .call(() => showTab("ssh"), null, 4.4)
+      .to(sshKey, { autoAlpha: 1, y: 0, duration: 0.3 }, 4.5)
+      .to(typeB, {
+        i: SSH.length,
+        duration: 0.5,
+        ease: "none",
+        onUpdate: () => { sshCmd.textContent = SSH.slice(0, Math.round(typeB.i)); },
+      }, 4.95)
+      .to(sshCursor, { autoAlpha: 0, duration: 0.15 }, 5.5)
+      .to(sshOut, { autoAlpha: 1, y: 0, duration: 0.35 }, 5.85)
+
+      .call(() => showTab("ports"), null, 8.6)
+      .to([port1, port2], { autoAlpha: 1, x: 0, duration: 0.4, stagger: 0.22 }, 8.9)
+      .to(portAdd, { autoAlpha: 1, x: 0, duration: 0.3 }, 9.5)
+      .to(port1, { boxShadow: "0 0 0 2px rgba(158, 217, 87, 0.35)", duration: 0.3, yoyo: true, repeat: 1 }, 10.2)
+
+      .call(() => { typeA.i = 0; typeB.i = 0; }, null, 12.3)
+      .call(resetEnv, null, 12.35)
+      .set({}, {}, 12.6); // pad the loop end
+
+    timelines.push(tl);
+    playWhileVisible(env, tl);
   }
 
   /* ---------- event-driven automation engine ---------- */

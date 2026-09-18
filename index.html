@@ -565,11 +565,172 @@
         <div class="sec-head" data-reveal>
           <span class="sec-kicker mono">Latest releases</span>
           <h2 class="sec-title">Ships fast. <span class="dim">Ships visibly.</span></h2>
-          <p class="sec-sub">Every release below is a real feature your team can use today — from a
-          visual automation engine to one-click workspace theming to plugging in any coding agent.</p>
+          <p class="sec-sub">Every release below is a real feature your team can use today — from commenting
+          on a live preview page straight into a task, to long-lived environments with SSH and port forwards,
+          to plugging in any coding agent you're already logged into.</p>
         </div>
 
         <div class="wn-grid">
+          <!-- Browser extension for page annotations -->
+          <article class="wn-card wn-card-wide" data-reveal>
+            <div class="wn-head">
+              <span class="wn-version mono">v0.15.0</span>
+              <h3>Comment on the page. Get a task.</h3>
+              <p>The Paca browser extension lets you annotate any element of a running environment's
+              preview — right on the page — and turn a comment into a real task in one click. It rides
+              on your existing Paca session: no separate login, no copied tokens.</p>
+            </div>
+            <div class="wn-visual ext-demo" id="ext-demo" aria-hidden="true">
+              <div class="ext-browser">
+                <div class="ext-chrome">
+                  <span class="acp-dots"><i></i><i></i><i></i></span>
+                  <span class="ext-url mono">
+                    <svg viewBox="0 0 24 24" width="9" height="9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+                    dev-box-3000.paca.example<span class="ext-url-dim">/signup</span>
+                  </span>
+                  <span class="ext-badge"><img src="assets/paca-logo.svg" width="11" height="11" alt="" aria-hidden="true">Paca</span>
+                </div>
+                <div class="ext-page">
+                  <div class="ext-mock">
+                    <div class="ext-mock-nav"><i class="ext-mock-logo"></i><i></i><i></i><i></i></div>
+                    <div class="ext-mock-hero">
+                      <span class="ext-mock-line"></span>
+                      <span class="ext-mock-line short"></span>
+                      <span class="ext-mock-btn" id="ext-target">Sign up now</span>
+                    </div>
+                  </div>
+
+                  <span class="ext-cursor" id="ext-cursor">
+                    <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 3l14 8.5-6.2 1.6L9.6 19z" fill="#f0f0f0" stroke="#0a0a0a" stroke-width="1.6" stroke-linejoin="round"/></svg>
+                  </span>
+                  <span class="ext-pin mono" id="ext-pin"><span id="ext-pin-label">1</span></span>
+
+                  <div class="ext-popover" id="ext-popover">
+                    <div class="ext-pop-head">
+                      <span class="avatar avatar-h1">M</span>
+                      <span class="ext-pop-who">Mai</span>
+                      <span class="ext-pop-sel mono">button.cta</span>
+                    </div>
+                    <div class="ext-pop-text"><span id="ext-text">Say “Start free trial” — “Sign up” hides the trial.</span><span class="ext-caret" id="ext-caret"></span></div>
+                    <div class="ext-pop-foot">
+                      <span class="ext-pop-hint mono">⌘↵ to post</span>
+                      <span class="ext-pop-btn" id="ext-create">
+                        <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                        <span id="ext-create-label">Create task</span>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="ext-toast" id="ext-toast">
+                    <span class="acp-ok">✓</span>
+                    <span class="badge badge-story">Story</span>
+                    <span class="mono">PACA-141</span>
+                    <span class="ext-toast-title">Rename signup CTA</span>
+                  </div>
+
+                  <div class="ext-toolbar">
+                    <img src="assets/paca-logo.svg" width="12" height="12" alt="" aria-hidden="true">
+                    <span class="ext-tb-item is-active">
+                      <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"/></svg>
+                      Comment
+                    </span>
+                    <span class="ext-tb-item"><span id="ext-open-count">3</span> open</span>
+                    <span class="ext-tb-dot"><i></i>dev-box</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- provider_cli agent type -->
+          <article class="wn-card" data-reveal>
+            <div class="wn-head">
+              <span class="wn-version mono">v0.15.0</span>
+              <h3>Bring the CLI you're already logged into</h3>
+              <p>The new <span class="mono">provider_cli</span> agent type runs Claude Code, Codex, Gemini CLI, or
+              Cursor CLI inside one of its own static environments. Log in once from the environment's terminal;
+              Paca drives that CLI for every conversation afterward, syncing your MCP servers into its config.</p>
+            </div>
+            <div class="wn-visual cli-demo" id="cli-demo" aria-hidden="true">
+              <div class="cli-panel">
+                <div class="acp-panel-head">
+                  <img class="acp-mark" src="assets/paca-logo.svg" width="13" height="13" alt="" aria-hidden="true">
+                  <span class="acp-panel-title mono">new agent <span class="board-sep">·</span> provider_cli</span>
+                </div>
+                <div class="cli-form">
+                  <div class="cli-row">
+                    <span class="cli-label mono">cli</span>
+                    <div class="cli-tiles">
+                      <span class="cli-tile" data-cli="claude">Claude Code</span>
+                      <span class="cli-tile" data-cli="codex">Codex</span>
+                      <span class="cli-tile" data-cli="gemini">Gemini CLI</span>
+                      <span class="cli-tile" data-cli="cursor">Cursor CLI</span>
+                    </div>
+                  </div>
+                  <div class="cli-row">
+                    <span class="cli-label mono">environment</span>
+                    <span class="cli-env"><i class="env-status-dot"></i><span class="mono">dev-box</span><span class="cli-env-meta">static · login persists</span></span>
+                  </div>
+                </div>
+                <div class="acp-term cli-term">
+                  <div class="acp-cmd-line"><span class="acp-prompt mono">$</span><span class="mono acp-cmd" id="cli-cmd">claude /login</span><span class="acp-cursor" id="cli-cursor"></span></div>
+                  <div class="acp-out" id="cli-out-1"><span class="acp-ok">✓</span>logged in <span class="acp-out-dim">· once, for every conversation</span></div>
+                  <div class="acp-out" id="cli-out-2"><span class="acp-ok">✓</span>synced <span class="mono">3</span> MCP servers <span class="acp-out-dim">· paca, github, postgres</span></div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Static environments -->
+          <article class="wn-card" data-reveal>
+            <div class="wn-head">
+              <span class="wn-version mono">v0.14.0</span>
+              <h3>Static environments</h3>
+              <p>A named, long-lived container that outlives any single conversation — files and background
+              processes survive across chats. Reach it through an in-browser terminal, real SSH with
+              per-environment keys, or a port forward to preview a live dev server.</p>
+            </div>
+            <div class="wn-visual env-demo" id="env-demo" aria-hidden="true">
+              <div class="env-panel">
+                <div class="env-head">
+                  <span class="env-name"><i class="env-status-dot"></i><span class="mono">dev-box</span><span class="env-meta">running · 6d</span></span>
+                  <div class="env-tabs">
+                    <span class="env-tab is-active" data-tab="terminal" id="env-tab-terminal">Terminal</span>
+                    <span class="env-tab" data-tab="ssh" id="env-tab-ssh">SSH</span>
+                    <span class="env-tab" data-tab="ports" id="env-tab-ports">Ports</span>
+                  </div>
+                </div>
+                <div class="env-body">
+                  <div class="env-pane is-active" id="env-pane-terminal">
+                    <div class="acp-cmd-line"><span class="acp-prompt mono">$</span><span class="mono acp-cmd" id="env-cmd">npm run dev</span><span class="acp-cursor" id="env-cursor"></span></div>
+                    <div class="acp-out" id="env-out-1"><span class="acp-out-dim">›</span>ready on <span class="mono">http://localhost:3000</span></div>
+                    <div class="acp-out" id="env-out-2"><span class="acp-ok">✓</span>keeps running after the chat ends</div>
+                  </div>
+                  <div class="env-pane" id="env-pane-ssh">
+                    <div class="env-kv" id="env-ssh-key"><span class="env-k mono">key</span><span class="mono">mai@laptop</span><span class="env-kv-ok"><span class="acp-ok">✓</span>authorized</span></div>
+                    <div class="acp-cmd-line"><span class="acp-prompt mono">$</span><span class="mono acp-cmd" id="env-ssh-cmd">ssh dev-box</span><span class="acp-cursor" id="env-ssh-cursor"></span></div>
+                    <div class="acp-out" id="env-ssh-out"><span class="acp-ok">✓</span>connected <span class="acp-out-dim">· same files, same processes</span></div>
+                  </div>
+                  <div class="env-pane" id="env-pane-ports">
+                    <div class="env-port" id="env-port-1">
+                      <span class="env-port-no mono">3000</span>
+                      <span class="env-port-arrow">→</span>
+                      <span class="env-port-url mono">dev-box-3000.paca.example</span>
+                      <span class="env-port-badge">preview</span>
+                    </div>
+                    <div class="env-port" id="env-port-2">
+                      <span class="env-port-no mono">5432</span>
+                      <span class="env-port-arrow">→</span>
+                      <span class="env-port-url mono">dev-box-5432.paca.example</span>
+                      <span class="env-port-badge is-private">private</span>
+                    </div>
+                    <span class="env-port-add mono" id="env-port-add">+ forward a port</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
           <!-- Event-driven automation engine -->
           <article class="wn-card wn-card-wide" data-reveal>
             <div class="wn-head">

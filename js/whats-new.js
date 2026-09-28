@@ -1,6 +1,6 @@
 /* ============================================================
    Paca Landing — "What's new" release demos
-   Looping GSAP timelines, one per release card: the browser
+   Looping GSAP timelines, one per release card: Jev AI, the browser
    extension, provider_cli agents, static environments, the
    automation engine, branding, ACP, the project-level AI chat
    and the activity diff + one-click revert. Initialized from
@@ -612,6 +612,157 @@ window.initWhatsNewDemos = function initWhatsNewDemos() {
 
     timelines.push(tl);
     playWhileVisible(acp, tl);
+  }
+
+  /* ---------- v0.17.0 · Jev AI ---------- */
+  const jev = $("#jev-demo");
+  if (jev) {
+    const tabs = Array.from(jev.querySelectorAll(".jev-tab"));
+    const panes = Array.from(jev.querySelectorAll(".jev-pane"));
+    const pane = (k) => $(`[data-pane="${k}"]`, jev);
+    const tabBar = (k) => $(`[data-jev="${k}"] i`, jev);
+
+    // auto-route
+    const routeQ = $("#jev-route-q", jev);
+    const cands = Array.from(pane("route").querySelectorAll(".jev-cand"));
+    const bars = cands.map((c) => $(".jev-bar i", c));
+    const routeResult = $("#jev-route-result", jev);
+    // auto-fill
+    const fillFields = Array.from(pane("fill").querySelectorAll("[data-fill]"));
+    const fillStatus = $("#jev-fill-status", jev);
+    // auto-assign
+    const members = Array.from(pane("assign").querySelectorAll(".jev-member"));
+    const assignee = $("#jev-assignee", jev);
+    const assignAct = $("#jev-assign-act", jev);
+    const AUTO_HTML = assignee.innerHTML;
+    const LINH_HTML = '<span class="avatar avatar-h2">L</span>Linh <span class="jev-kept">✦ via Jev</span>';
+    // condition
+    const wire = $("#jev-wire", jev);
+    const meter = $("#jev-meter", jev);
+    const conf = $("#jev-conf", jev);
+    const branches = Array.from(pane("cond").querySelectorAll(".jev-branch"));
+    const condStatus = $("#jev-cond-status", jev);
+
+    function show(key) {
+      tabs.forEach((t) => t.classList.toggle("is-active", t.dataset.jev === key));
+      panes.forEach((p) => {
+        const on = p.dataset.pane === key;
+        p.classList.toggle("is-active", on);
+        if (on) gsap.fromTo(p, { autoAlpha: 0, y: 8 }, { autoAlpha: 1, y: 0, duration: 0.4, ease: "power2.out" });
+        else gsap.set(p, { autoAlpha: 0 });
+      });
+    }
+    const lit = (els, winner) => els.forEach((e) => {
+      e.classList.toggle("is-lit", e === winner);
+      e.classList.toggle("is-dim", winner && e !== winner);
+    });
+
+    function resetRoute() {
+      gsap.set(routeQ, { autoAlpha: 0, y: 8 });
+      gsap.set(cands, { autoAlpha: 0, x: -8 });
+      gsap.set(bars, { width: 0 });
+      gsap.set(routeResult, { autoAlpha: 0, x: -6 });
+      lit(cands, null);
+    }
+    function resetFill() {
+      fillFields.forEach((f) => f.classList.remove("is-filled", "is-flash"));
+      gsap.set(fillStatus, { autoAlpha: 0 });
+    }
+    function resetAssign() {
+      members.forEach((m) => m.classList.remove("is-scan"));
+      lit(members, null);
+      assignee.innerHTML = AUTO_HTML;
+      gsap.set(assignAct, { autoAlpha: 0, y: 6 });
+    }
+    function resetCond() {
+      wire.classList.remove("is-live");
+      meter.classList.remove("is-pass", "is-fail");
+      gsap.set(meter, { width: 0 });
+      conf.textContent = "0.00";
+      lit(branches, null);
+      branches.forEach((b) => b.classList.remove("is-dim"));
+      gsap.set(condStatus, { autoAlpha: 0 });
+    }
+    function resetAll() {
+      resetRoute(); resetFill(); resetAssign(); resetCond();
+      gsap.set(tabs.map((t) => $("i", t)), { scaleX: 0 });
+    }
+    resetAll();
+
+    const tl = gsap.timeline({ repeat: -1, paused: true, defaults: { ease: "power2.out" } });
+    const SCENE = { route: 0, fill: 6.2, assign: 11.6, cond: 17.4 };
+    const END = 26.4;
+    const keys = Object.keys(SCENE);
+    keys.forEach((k, i) => {
+      const t0 = SCENE[k];
+      const t1 = i + 1 < keys.length ? SCENE[keys[i + 1]] : END;
+      tl.call(() => show(k), null, t0)
+        .fromTo(tabBar(k), { scaleX: 0 }, { scaleX: 1, duration: t1 - t0, ease: "none" }, t0)
+        .set(tabBar(k), { scaleX: 0 }, t1 - 0.01);
+    });
+
+    // 1 — Auto-routing: a message arrives, Jev scores each agent's description, the best fit takes it
+    let t = SCENE.route;
+    tl.call(resetRoute, null, t)
+      .to(routeQ, { autoAlpha: 1, y: 0, duration: 0.45 }, t + 0.35)
+      .to(cands, { autoAlpha: 1, x: 0, duration: 0.35, stagger: 0.12 }, t + 1.0);
+    cands.forEach((c, i) => {
+      tl.fromTo(bars[i], { width: 0 }, { width: `${Number(c.dataset.score) * 100}%`, duration: 0.9, ease: "power3.out" }, t + 1.6 + i * 0.08);
+    });
+    tl.call(() => lit(cands, cands.find((c) => c.classList.contains("is-win"))), null, t + 2.8)
+      .to(routeResult, { autoAlpha: 1, x: 0, duration: 0.4 }, t + 3.2);
+
+    // 2 — Auto-fill: blank fields populate one by one; the epic Mai set is left alone
+    t = SCENE.fill;
+    tl.call(resetFill, null, t);
+    fillFields.forEach((f, i) => {
+      tl.call(() => f.classList.add("is-filled", "is-flash"), null, t + 1.0 + i * 0.45)
+        .call(() => f.classList.remove("is-flash"), null, t + 1.6 + i * 0.45);
+    });
+    tl.to(fillStatus, { autoAlpha: 1, duration: 0.35 }, t + 1.2 + fillFields.length * 0.45);
+
+    // 3 — Auto-assign: scan member descriptions, pick the best match, explain it in the activity feed
+    t = SCENE.assign;
+    tl.call(resetAssign, null, t);
+    members.forEach((m, i) => {
+      tl.call(() => { members.forEach((x) => x.classList.toggle("is-scan", x === m)); }, null, t + 0.8 + i * 0.4);
+    });
+    tl.call(() => {
+        members.forEach((x) => x.classList.remove("is-scan"));
+        lit(members, members.find((m) => m.classList.contains("is-win")));
+      }, null, t + 2.1)
+      .call(() => { assignee.innerHTML = LINH_HTML; }, null, t + 2.5)
+      .fromTo(assignee, { autoAlpha: 0, x: -4 }, { autoAlpha: 1, x: 0, duration: 0.35 }, t + 2.5)
+      .to(assignAct, { autoAlpha: 1, y: 0, duration: 0.4 }, t + 3.0);
+
+    // 4 — Jev Condition: a confident answer follows its branch; an unsure one falls back to Else
+    t = SCENE.cond;
+    const pass = (start, value, branchKey, status) => {
+      const proxy = { v: 0 };
+      const ok = value >= 0.7;
+      tl.call(() => {
+          resetCond();
+          wire.classList.add("is-live");
+        }, null, start)
+        .fromTo(meter, { width: 0 }, { width: `${value * 100}%`, duration: 1.1, ease: "power2.out" }, start + 0.5)
+        .fromTo(proxy, { v: 0 }, {
+          v: value, duration: 1.1, ease: "power2.out",
+          onUpdate: () => { conf.textContent = proxy.v.toFixed(2); },
+        }, start + 0.5)
+        .call(() => {
+          meter.classList.add(ok ? "is-pass" : "is-fail");
+          const w = branches.find((b) => b.dataset.branch === branchKey);
+          lit(branches, w);
+          condStatus.textContent = status;
+        }, null, start + 1.7)
+        .to(condStatus, { autoAlpha: 1, duration: 0.3 }, start + 1.8);
+    };
+    pass(t + 0.2, 0.88, "yes", "0.88 ≥ 0.70 → Yes branch");
+    pass(t + 4.5, 0.41, "else", "0.41 < 0.70 — Jev is unsure → Else");
+    tl.call(resetAll, null, END - 0.05).set({}, {}, END);
+
+    timelines.push(tl);
+    playWhileVisible(jev, tl);
   }
 
   return timelines.length ? timelines : null;

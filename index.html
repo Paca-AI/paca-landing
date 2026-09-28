@@ -568,12 +568,114 @@
         <div class="sec-head" data-reveal>
           <span class="sec-kicker mono">Latest releases</span>
           <h2 class="sec-title">Ships fast. <span class="dim">Ships visibly.</span></h2>
-          <p class="sec-sub">Every release below is a real feature your team can use today — from commenting
-          on a live preview page straight into a task, to long-lived environments with SSH and port forwards,
+          <p class="sec-sub">Every release below is a real feature your team can use today — from Jev AI
+          routing chats, filling and assigning tasks for you, to commenting on a live preview page straight into a task, to long-lived environments with SSH and port forwards,
           to plugging in any coding agent you're already logged into.</p>
         </div>
 
         <div class="wn-grid">
+          <!-- Jev AI integration -->
+          <article class="wn-card wn-card-wide wn-card-new" data-reveal>
+            <div class="wn-head">
+              <span class="wn-version mono">v0.17.0 <span class="wn-new">New</span></span>
+              <h3>Jev AI makes the small calls for you</h3>
+              <p>Plug <a class="wn-link" href="https://docs.typesafe.ai" target="_blank" rel="noopener">Jev</a>,
+              an AI decision engine, into any project to handle the routing calls a team makes all day.
+              It's opt-in per project, bring your own key (TypeSafe or any Jev-compatible host such as OpenJev),
+              and it only acts when it's confident — never overwriting what a person set.</p>
+              <ul class="jev-list">
+                <li><b>Agent Auto-routing</b> — pick <span class="mono">Auto</span> and Jev hands your message to the best-fit agent.</li>
+                <li><b>Task Auto-fill</b> — blank priority, type, points, tags and epic, filled on create.</li>
+                <li><b>Task Auto-assign</b> — the best-matching member, or a reason why not.</li>
+                <li><b>Jev Condition</b> — branch automations on a choice, a score, or yes/no.</li>
+              </ul>
+            </div>
+            <div class="wn-visual jev-demo" id="jev-demo" aria-hidden="true">
+              <div class="jev-panel">
+                <div class="acp-panel-head jev-head">
+                  <span class="jev-spark">✦</span>
+                  <span class="acp-panel-title mono">jev <span class="board-sep">·</span> web-app</span>
+                  <div class="jev-tabs">
+                    <span class="jev-tab is-active" data-jev="route">Auto-route<i></i></span>
+                    <span class="jev-tab" data-jev="fill">Auto-fill<i></i></span>
+                    <span class="jev-tab" data-jev="assign">Auto-assign<i></i></span>
+                    <span class="jev-tab" data-jev="cond">Condition<i></i></span>
+                  </div>
+                </div>
+                <div class="jev-body">
+                  <!-- Agent Auto-routing -->
+                  <div class="jev-pane is-active" data-pane="route">
+                    <div class="chat-msg jev-q" id="jev-route-q">
+                      <span class="avatar avatar-h1">M</span>
+                      <span class="chat-bubble">The login e2e test is flaky on CI again — can someone dig in?</span>
+                    </div>
+                    <div class="jev-cands">
+                      <div class="jev-cand" data-score="0.21"><span class="jev-cand-name">Planner</span><span class="jev-cand-desc">breaks work into tasks</span><span class="jev-bar"><i></i></span><span class="jev-score mono">0.21</span></div>
+                      <div class="jev-cand is-win" data-score="0.92"><span class="jev-cand-name">QA Engineer</span><span class="jev-cand-desc">tests, CI, flaky specs</span><span class="jev-bar"><i></i></span><span class="jev-score mono">0.92</span></div>
+                      <div class="jev-cand" data-score="0.47"><span class="jev-cand-name">Frontend Dev</span><span class="jev-cand-desc">React UI work</span><span class="jev-bar"><i></i></span><span class="jev-score mono">0.47</span></div>
+                    </div>
+                    <div class="jev-foot">
+                      <span class="jev-picker"><span class="jev-spark">✦</span>Auto</span>
+                      <span class="jev-arrow">→</span>
+                      <span class="jev-result" id="jev-route-result"><span class="avatar avatar-ai">Q</span>QA Engineer picked it up</span>
+                    </div>
+                  </div>
+
+                  <!-- Task Auto-fill -->
+                  <div class="jev-pane" data-pane="fill">
+                    <div class="jev-task">
+                      <div class="jev-task-title"><span class="mono jev-tid">PACA-208</span>Checkout button does nothing on Safari</div>
+                      <div class="jev-fields">
+                        <div class="jev-field" data-fill><span class="jev-k">Priority</span><span class="jev-v"><span class="jev-empty">—</span><span class="jev-val"><span class="badge badge-bug">High</span></span></span></div>
+                        <div class="jev-field" data-fill><span class="jev-k">Type</span><span class="jev-v"><span class="jev-empty">—</span><span class="jev-val"><span class="badge badge-bug">Bug</span></span></span></div>
+                        <div class="jev-field" data-fill><span class="jev-k">Points</span><span class="jev-v"><span class="jev-empty">—</span><span class="jev-val mono">3</span></span></div>
+                        <div class="jev-field" data-fill><span class="jev-k">Tags</span><span class="jev-v"><span class="jev-empty">—</span><span class="jev-val"><span class="badge badge-chore">safari</span> <span class="badge badge-chore">checkout</span></span></span></div>
+                        <div class="jev-field is-human"><span class="jev-k">Epic</span><span class="jev-v"><span class="badge badge-spec">Payments v2</span><span class="jev-kept">set by Mai · kept</span></span></div>
+                      </div>
+                    </div>
+                    <div class="jev-foot"><span class="jev-status mono" id="jev-fill-status"><span class="jev-spark">✦</span>4 blank fields filled</span></div>
+                  </div>
+
+                  <!-- Task Auto-assign -->
+                  <div class="jev-pane" data-pane="assign">
+                    <div class="jev-task">
+                      <div class="jev-task-title"><span class="mono jev-tid">PACA-208</span>Checkout button does nothing on Safari</div>
+                      <div class="jev-fields">
+                        <div class="jev-field"><span class="jev-k">Assignee</span><span class="jev-v"><span class="jev-assignee" id="jev-assignee"><span class="jev-picker jev-picker-sm"><span class="jev-spark">✦</span>Auto</span></span></span></div>
+                      </div>
+                    </div>
+                    <div class="jev-members">
+                      <div class="jev-member"><span class="avatar avatar-h1">M</span><span class="jev-cand-name">Mai</span><span class="jev-cand-desc">design, copy</span></div>
+                      <div class="jev-member is-win"><span class="avatar avatar-h2">L</span><span class="jev-cand-name">Linh</span><span class="jev-cand-desc">frontend, browser bugs</span></div>
+                      <div class="jev-member"><span class="avatar avatar-h1">T</span><span class="jev-cand-name">Tuan</span><span class="jev-cand-desc">API, billing</span></div>
+                    </div>
+                    <div class="jev-activity" id="jev-assign-act"><span class="jev-spark">✦</span><span><b>Jev</b> assigned <b>Linh</b> <span class="acp-out-dim">— “frontend, browser bugs” matches a Safari checkout issue</span></span></div>
+                  </div>
+
+                  <!-- Jev Condition -->
+                  <div class="jev-pane" data-pane="cond">
+                    <div class="jev-flow">
+                      <div class="jev-node jev-node-trig"><span class="jev-node-k mono">trigger</span>Task created</div>
+                      <span class="jev-wire" id="jev-wire"></span>
+                      <div class="jev-node jev-node-jev">
+                        <span class="jev-node-k mono"><span class="jev-spark">✦</span>jev condition · yes/no</span>
+                        “Is this a refund request?”
+                        <div class="jev-meter"><span class="jev-meter-fill" id="jev-meter"></span><span class="jev-meter-th"></span></div>
+                        <span class="jev-meter-lbl mono"><span id="jev-conf">0.00</span> confidence <span class="acp-out-dim">· threshold 0.70</span></span>
+                      </div>
+                      <div class="jev-branches">
+                        <span class="jev-branch" data-branch="yes">Yes → Billing queue</span>
+                        <span class="jev-branch" data-branch="no">No → Triage</span>
+                        <span class="jev-branch jev-branch-else" data-branch="else">Else → ask a human</span>
+                      </div>
+                    </div>
+                    <div class="jev-foot"><span class="jev-status mono" id="jev-cond-status">unsure or unavailable → Else</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
           <!-- Browser extension for page annotations -->
           <article class="wn-card wn-card-wide" data-reveal>
             <div class="wn-head">

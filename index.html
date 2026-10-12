@@ -568,16 +568,56 @@
         <div class="sec-head" data-reveal>
           <span class="sec-kicker mono">Latest releases</span>
           <h2 class="sec-title">Ships fast. <span class="dim">Ships visibly.</span></h2>
-          <p class="sec-sub">Every release below is a real feature your team can use today — from Jev AI
+          <p class="sec-sub">Every release below is a real feature your team can use today — from roles you configure per resource, to Jev AI
           routing chats, filling and assigning tasks for you, to commenting on a live preview page straight into a task, to long-lived environments with SSH and port forwards,
           to plugging in any coding agent you're already logged into.</p>
         </div>
 
         <div class="wn-grid">
-          <!-- Jev AI integration -->
+          <!-- Role-based authorization -->
           <article class="wn-card wn-card-wide wn-card-new" data-reveal>
             <div class="wn-head">
-              <span class="wn-version mono">v0.17.0 <span class="wn-new">New</span></span>
+              <span class="wn-version mono">v0.19.0 <span class="wn-new">New</span></span>
+              <h3>Roles, down to a single resource</h3>
+              <p>Access is now controlled by roles: named policies that allow or deny actions on
+              resources. Nothing is allowed by default, and an explicit Deny always wins.
+              Configure a role on a whole project or just one sprint, doc or environment.</p>
+              <ul class="jev-list">
+                <li><b>Per-resource roles</b> — from <span class="mono">project/*</span> down to one task, sprint, doc or environment.</li>
+                <li><b>Conditions</b> — narrow by sprint, status, assignee, doc folder or environment type.</li>
+                <li><b>Simple &amp; Advanced editors</b> — pick permissions, or write the JSON policy directly.</li>
+                <li><b>Humans and agents</b> — assign several roles per user, member or agent.</li>
+              </ul>
+              <p class="wn-more"><a class="wn-link" href="https://github.com/Paca-AI/paca/blob/master/docs/guides/roles-and-policies.md" target="_blank" rel="noopener">Read the roles guide →</a></p>
+            </div>
+            <div class="wn-visual role-demo" aria-hidden="true">
+              <div class="role-panel">
+                <div class="role-head">
+                  <span class="mono role-name">Sprint 5 contributor</span>
+                  <span class="role-tabs mono"><span>Simple</span><span class="is-active">Advanced</span></span>
+                </div>
+                <div class="role-body">
+                  <div class="role-stmt">
+                    <span class="role-effect role-allow mono">Allow</span>
+                    <span class="mono role-actions">tasks:read · tasks:write</span>
+                    <span class="mono role-res">project/web-app/*</span>
+                    <span class="mono role-cond">task.sprint_id = Sprint 5</span>
+                  </div>
+                  <div class="role-stmt">
+                    <span class="role-effect role-deny mono">Deny</span>
+                    <span class="mono role-actions">environments:connect</span>
+                    <span class="mono role-res">project/*/environment/*</span>
+                    <span class="mono role-cond">environment.type = kubernetes</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Jev AI integration -->
+          <article class="wn-card wn-card-wide" data-reveal>
+            <div class="wn-head">
+              <span class="wn-version mono">v0.17.0</span>
               <h3>Jev AI makes the small calls for you</h3>
               <p>Plug <a class="wn-link" href="https://docs.typesafe.ai" target="_blank" rel="noopener">Jev</a>,
               an AI decision engine, into any project to handle the routing calls a team makes all day.

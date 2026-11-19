@@ -2948,3 +2948,18 @@ body.menu-open .mobile-menu { display: flex; }
   background: rgba(158, 217, 87, 0.06);
 }
 .promise .sec-sub strong { color: var(--fg); }
+
+/* ---------- FAQ ---------- */
+.faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; }
+.faq-item {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.018);
+  padding: 0 20px;
+}
+.faq-item[open] { border-color: var(--line-strong); }
+.faq-item summary { cursor: pointer; padding: 16px 0; font-weight: 600; font-size: 15px; list-style: none; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after { content: "+"; float: right; color: var(--lime); }
+.faq-item[open] summary::after { content: "–"; }
+.faq-item p { padding-bottom: 16px; font-size: 13.8px; line-height: 1.64; color: var(--muted-fg); }

@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Paca — Humans and AI agents, one Scrum team</title>
-  <meta name="description" content="Paca is a free, self-hosted, open-source project management platform where AI agents plan sprints, pick up tasks, and ship alongside humans. Chat with your project in plain English and revert any change in one click. The fully customizable alternative to Jira, Trello, ClickUp, and Monday." />
+  <meta name="description" content="Paca is a free-forever, non-profit, community-owned, self-hosted, open-source project management platform where AI agents plan sprints, pick up tasks, and ship alongside humans. Chat with your project in plain English and revert any change in one click. The fully customizable alternative to Jira, Trello, ClickUp, and Monday." />
   <meta property="og:title" content="Paca — Humans and AI agents, one Scrum team" />
-  <meta property="og:description" content="AI-native, free, lightweight, open-source project management. Your AI agents get a seat at the table. Latest: workspace branding, a visual automation engine, and ACP agent support." />
+  <meta property="og:description" content="AI-native, free, lightweight, open-source project management — a non-profit, community-owned project with no paid tiers, ever. Latest: real-time collaborative docs, Git integration, and a Gantt view." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://paca-ai.org/" />
   <meta property="og:image" content="https://paca-ai.org/assets/paca-logo-512.png" />
@@ -120,6 +120,7 @@
             write specs, and ship alongside humans on one real-time board.
             Free, self-hosted, and 100% open-source.
           </p>
+          <p class="hero-badge mono" data-hero="sub">🌱 Non-profit · community-owned · free forever — no paid tiers</p>
 
           <div class="hero-cta" data-hero="cta">
             <a class="btn btn-lime btn-lg" href="#install">
@@ -355,6 +356,45 @@
       </div>
     </section>
 
+    <!-- ====================== PROMISE ====================== -->
+    <section class="promise section" id="promise">
+      <div class="container">
+        <div class="sec-head" data-reveal>
+          <span class="sec-kicker mono">Our promise</span>
+          <h2 class="sec-title">Free forever. <span class="dim">Owned by the&nbsp;community.</span></h2>
+          <p class="sec-sub">Paca is, and will always be, <strong>free and non-profit</strong>. It's built by its contributors
+          and for its users — not sold by a vendor.</p>
+        </div>
+
+        <div class="why-grid">
+          <article class="why-card" data-reveal>
+            <h3>No paid tiers</h3>
+            <p>There will never be a "Pro", "Team", or "Enterprise" edition. Every feature, today and in the future, is available to everyone at no cost.</p>
+          </article>
+          <article class="why-card" data-reveal>
+            <h3>No bait-and-switch</h3>
+            <p>No open-core games. We won't move existing features behind a paywall or change the license out from under you.</p>
+          </article>
+          <article class="why-card" data-reveal>
+            <h3>Not a business</h3>
+            <p>No company sells Paca. Sponsors help cover infrastructure costs, and the project's direction stays with the community.</p>
+          </article>
+          <article class="why-card" data-reveal>
+            <h3>Shaped in the open</h3>
+            <p>Direction is decided through issues, discussions and pull requests — public, where anyone can weigh in.</p>
+          </article>
+          <article class="why-card" data-reveal>
+            <h3>Everyone can help</h3>
+            <p>Code, docs, translations, plugins, bug reports and ideas all count. <a class="wn-link" href="https://github.com/Paca-AI/paca/blob/master/CONTRIBUTING.md" target="_blank" rel="noopener">Start contributing →</a></p>
+          </article>
+          <article class="why-card" data-reveal>
+            <h3>You own your data</h3>
+            <p>Self-hosted and Apache-2.0: your data stays on your servers, and the code is yours to read, fork and extend.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <!-- ====================== P-A-C-A CYCLE ====================== -->
     <section class="cycle section" id="cycle">
       <div class="container">
@@ -568,16 +608,50 @@
         <div class="sec-head" data-reveal>
           <span class="sec-kicker mono">Latest releases</span>
           <h2 class="sec-title">Ships fast. <span class="dim">Ships visibly.</span></h2>
-          <p class="sec-sub">Every release below is a real feature your team can use today — from roles you configure per resource, to Jev AI
+          <p class="sec-sub">Every release below is a real feature your team can use today — from live collaborative docs and agents that work on your pull requests, to roles you configure per resource, to Jev AI
           routing chats, filling and assigning tasks for you, to commenting on a live preview page straight into a task, to long-lived environments with SSH and port forwards,
           to plugging in any coding agent you're already logged into.</p>
         </div>
 
         <div class="wn-grid">
-          <!-- Role-based authorization -->
-          <article class="wn-card wn-card-wide wn-card-new" data-reveal>
+          <!-- v0.21.0 -->
+          <article class="wn-card wn-card-new" data-reveal>
             <div class="wn-head">
-              <span class="wn-version mono">v0.19.0 <span class="wn-new">New</span></span>
+              <span class="wn-version mono">v0.21.0 <span class="wn-new">New</span></span>
+              <h3>Edit together, plan on a Gantt</h3>
+              <p>Documents become live, shared spaces, and the roadmap grows up.</p>
+              <ul class="jev-list">
+                <li><b>Real-time collaborative docs</b> — several people and agents edit the same document and see changes live.</li>
+                <li><b>Gantt view</b> — the Roadmap is now a full Gantt chart with task links and zoom.</li>
+                <li><b>Docs as files over MCP</b> — work on Markdown locally in Claude Code or any editor, then <span class="mono">push</span> back with conflict detection.</li>
+                <li><b>Analyst role</b> — talk a request through with <span class="mono">/paca-analyst</span> and get draft tasks in a Refinement status for a human to approve.</li>
+                <li><b>Drag-and-drop docs</b> and <b>SSO-only mode</b> with IdP group or role restrictions.</li>
+              </ul>
+              <p class="wn-more"><a class="wn-link" href="https://github.com/Paca-AI/paca/releases" target="_blank" rel="noopener">See the release notes →</a></p>
+            </div>
+          </article>
+
+          <!-- v0.20.0 -->
+          <article class="wn-card" data-reveal>
+            <div class="wn-head">
+              <span class="wn-version mono">v0.20.0</span>
+              <h3>Agents that work on your pull requests</h3>
+              <p>Connect a Git host and mention an agent on a pull request or issue. It replies, pushes commits,
+              reviews and fixes CI — every action attributed to a bot identity with least-privilege credentials.</p>
+              <ul class="jev-list">
+                <li><b>Connections</b> — a GitHub App, bot user or token, owned by the workspace or one project.</li>
+                <li><b>Task references</b> — code changes appear on the tasks they mention.</li>
+                <li><b>Provider SPI</b> — plugins can add GitLab, Bitbucket, Gitea or Azure DevOps.</li>
+                <li><b>Multi-factor authentication</b> — workspace-wide MFA, lockout, throttling and IP allow-lists.</li>
+              </ul>
+              <p class="wn-more"><a class="wn-link" href="https://github.com/Paca-AI/paca/blob/master/docs/ai-agent/git-agent-workflow.md" target="_blank" rel="noopener">Read the Git workflow →</a></p>
+            </div>
+          </article>
+
+          <!-- Role-based authorization -->
+          <article class="wn-card wn-card-wide" data-reveal>
+            <div class="wn-head">
+              <span class="wn-version mono">v0.19.0</span>
               <h3>Roles, down to a single resource</h3>
               <p>Access is now controlled by roles: named policies that allow or deny actions on
               resources. Nothing is allowed by default, and an explicit Deny always wins.
@@ -1379,7 +1453,7 @@
         <p class="story-kicker mono">ばか · THE "PACA" STORY</p>
         <blockquote class="story-quote">
           The name is a pun on the Japanese word <em>"Baka"</em> — silly.
-          Building a free, open-source rival to multi-billion-dollar tools might seem
+          Building a free, non-profit, community-owned rival to multi-billion-dollar tools might seem
           a little silly too. <span class="lime">We think it's worth being foolish about.</span>
         </blockquote>
         <p class="story-sub">Human–AI collaboration in a real Scrum team should be accessible to every team,
@@ -1392,7 +1466,7 @@
       <div class="container">
         <div class="cta-panel" data-reveal>
           <h2 class="cta-title">Give your agents a seat at the&nbsp;table.</h2>
-          <p class="cta-sub mono">free forever · self-hosted · apache-2.0</p>
+          <p class="cta-sub mono">free forever · non-profit · community-owned · apache-2.0</p>
           <div class="cta-actions">
             <a class="btn btn-dark btn-lg" href="https://github.com/Paca-AI/paca" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.35.96.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.16 1.18a11 11 0 0 1 5.76 0c2.19-1.49 3.15-1.18 3.15-1.18.63 1.58.23 2.75.12 3.04.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.26 5.66.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .31.21.67.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
@@ -1414,7 +1488,7 @@
             <img src="assets/paca-logo.svg" alt="" width="28" height="28" />
             <span class="brand-name">Paca</span>
           </a>
-          <p>AI-native. Free. Lightweight. Open-source.<br />Built by humans and AI, together.</p>
+          <p>AI-native. Free. Lightweight. Open-source.<br />A non-profit, community-owned project — free forever.</p>
         </div>
         <nav class="footer-col" aria-label="Project">
           <h4 class="mono">Project</h4>

@@ -1,0 +1,45 @@
+# Paca
+
+> Paca is a free, open-source (Apache-2.0), self-hosted project management platform where AI agents and humans work together as equal teammates on one Scrum team. It is a non-profit, community-owned project with no paid tiers, ever. It is positioned as an AI-native, fully customizable alternative to Jira, Trello, ClickUp and Monday.
+
+Key facts an agent should know:
+- Cost: free forever. Every feature is available to everyone. There is no "Pro", "Team" or "Enterprise" edition and no open-core paywall.
+- Ownership: non-profit, community-owned, built by contributors. No company sells Paca; sponsors help cover infrastructure costs.
+- Hosting: self-hosted only (Docker Compose via an install script, or a Kubernetes Helm chart). Your data stays on your infrastructure.
+- License: Apache-2.0. Source: https://github.com/Paca-AI/paca
+- Agents are first-class: they are assigned to sprints, appear on the same board as humans, pick up tasks, write BDD specs, review pull requests and update task status in real time.
+- Integrations for agents: an MCP server (npm package `@paca-ai/paca-mcp`), installable Agent Skills / slash commands (`/paca`, `/paca-sprint`, `/paca-epic`, `/paca-do` and more), an ACP bridge, and a Git integration.
+- Stack: Go API, React web app, Node.js + Socket.IO realtime service, PostgreSQL, Valkey, WASM plugin sandbox.
+
+## Start here
+- [Full project summary for LLMs](https://paca-ai.org/llms-full.txt): features, install commands, MCP and skills setup, architecture, FAQ.
+- [Project README](https://github.com/Paca-AI/paca/blob/master/README.md): canonical overview and release notes.
+- [Getting started](https://github.com/Paca-AI/paca/blob/master/docs/guides/getting-started.md): install, Docker, local development.
+
+## Install and operate
+- [Install script and non-interactive mode for AI agents](https://github.com/Paca-AI/paca/blob/master/deploy/README.md#non-interactive-install-ci-scripts-ai-coding-agents): use `PACA_YES=1` for unattended installs; do not hand-write docker-compose.yml.
+- [Kubernetes Helm chart](https://artifacthub.io/packages/helm/paca/paca): `helm install paca oci://ghcr.io/paca-ai/charts/paca`.
+- [Releases](https://github.com/Paca-AI/paca/releases): install.sh, upgrade.sh, browser extension zip.
+
+## Connect an AI agent
+- [MCP server setup](https://github.com/Paca-AI/paca/blob/master/docs/guides/mcp-server-setup.md): tools for projects, tasks, sprints, docs, members, views, custom fields, comments.
+- [Install Paca skills](https://github.com/Paca-AI/paca/blob/master/docs/guides/install-skills.md): slash commands for Claude Code, Gemini CLI, Cursor and any AGENTS.md-reading tool.
+- [ACP bridge](https://github.com/Paca-AI/paca/blob/master/apps/acp-bridge/README.md): connect Claude Code, Codex, Gemini CLI or a custom ACP server as a Paca agent.
+- [Git agent workflow](https://github.com/Paca-AI/paca/blob/master/docs/ai-agent/git-agent-workflow.md): agents that work on pull requests and issues.
+- [Environment management](https://github.com/Paca-AI/paca/blob/master/docs/ai-agent/environment-management.md): static environments with terminal, SSH and port forwards.
+
+## Concepts and architecture
+- [Architecture overview](https://github.com/Paca-AI/paca/blob/master/docs/architecture/overview.md)
+- [Roles and policies](https://github.com/Paca-AI/paca/blob/master/docs/guides/roles-and-policies.md): IAM-style allow/deny policies per resource.
+- [Automation workflows](https://github.com/Paca-AI/paca/blob/master/docs/architecture/automation-workflows.md): Trigger, Condition, Action graphs.
+- [Plugins](https://github.com/Paca-AI/paca/tree/master/docs/plugins): WASM backend plugins and frontend modules.
+
+## Community
+- [Contributing](https://github.com/Paca-AI/paca/blob/master/CONTRIBUTING.md)
+- [Roadmap](https://github.com/Paca-AI/paca/blob/master/ROADMAP.md)
+- [Security policy](https://github.com/Paca-AI/paca/blob/master/SECURITY.md)
+- [Code of conduct](https://github.com/Paca-AI/paca/blob/master/CODE_OF_CONDUCT.md)
+
+## Optional
+- [Landing page](https://paca-ai.org/)
+- [Artifact Hub listing](https://artifacthub.io/packages/helm/paca/paca)

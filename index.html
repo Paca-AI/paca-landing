@@ -15,6 +15,9 @@
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:image" content="https://paca-ai.org/assets/paca-logo-512.png" />
   <link rel="canonical" href="https://paca-ai.org/" />
+  <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-readable project summary" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+  <meta name="keywords" content="AI project management, Scrum, AI agents, open source, self-hosted, MCP server, Jira alternative, ClickUp alternative, non-profit, free forever" />
   <link rel="icon" type="image/svg+xml" href="assets/paca-logo.svg" />
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="assets/paca-logo-192.png" />
@@ -25,6 +28,7 @@
     "@graph": [
       {
         "@type": "Organization",
+        "@id": "https://paca-ai.org/#org",
         "name": "Paca",
         "url": "https://paca-ai.org",
         "logo": {
@@ -33,13 +37,137 @@
           "width": 512,
           "height": 512
         },
-        "description": "AI-native, free, open-source project management where AI agents work alongside humans on one Scrum team.",
-        "sameAs": ["https://github.com/Paca-AI/paca"]
+        "description": "A non-profit, community-owned open-source project building AI-native, free-forever project management where AI agents work alongside humans on one Scrum team.",
+        "sameAs": [
+          "https://github.com/Paca-AI/paca",
+          "https://artifacthub.io/packages/helm/paca/paca",
+          "https://www.npmjs.com/package/@paca-ai/paca-mcp"
+        ]
       },
       {
         "@type": "WebSite",
+        "@id": "https://paca-ai.org/#website",
         "name": "Paca",
-        "url": "https://paca-ai.org"
+        "url": "https://paca-ai.org",
+        "publisher": {
+          "@id": "https://paca-ai.org/#org"
+        },
+        "inLanguage": "en"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://paca-ai.org/#software",
+        "name": "Paca",
+        "applicationCategory": "BusinessApplication",
+        "applicationSubCategory": "Project management",
+        "operatingSystem": "Linux, Docker, Kubernetes",
+        "description": "Self-hosted, open-source project management where AI agents and humans collaborate as teammates on a Scrumban board, with an MCP server, Agent Skills, BDD specs, automations, Git integration and a WASM plugin system.",
+        "url": "https://paca-ai.org",
+        "downloadUrl": "https://github.com/Paca-AI/paca/releases",
+        "installUrl": "https://github.com/Paca-AI/paca/releases/latest/download/install.sh",
+        "softwareVersion": "0.21.0",
+        "license": "https://www.apache.org/licenses/LICENSE-2.0",
+        "isAccessibleForFree": true,
+        "codeRepository": "https://github.com/Paca-AI/paca",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "description": "Free forever. No paid tiers."
+        },
+        "publisher": {
+          "@id": "https://paca-ai.org/#org"
+        },
+        "sameAs": [
+          "https://github.com/Paca-AI/paca"
+        ],
+        "featureList": [
+          "AI agents as first-class Scrum teammates",
+          "Unified Scrumban board with real-time updates",
+          "In-app AI chat",
+          "Activity diff and one-click revert",
+          "BDD scenario co-authoring",
+          "Real-time collaborative documents",
+          "Gantt roadmap view",
+          "Visual event-driven automation engine",
+          "IAM-style role-based authorization",
+          "Git integration with agents on pull requests",
+          "MCP server (@paca-ai/paca-mcp)",
+          "Agent Skills slash commands",
+          "ACP agent bridge",
+          "WASM plugin sandbox and marketplace",
+          "Self-hosted via Docker Compose or Helm"
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://paca-ai.org/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is Paca really free?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, forever. Paca is a non-profit, community-owned project with no paid tiers, no paywalled features and no open-core bait-and-switch. Every feature is available to everyone at no cost."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Who owns Paca?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The community. Paca is built by its contributors and for its users, and its direction is shaped in the open through issues, discussions and pull requests. No company sells Paca; sponsors only help cover infrastructure costs."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I install Paca?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Run the one-line install script on any Linux server with Docker: curl -fsSL https://github.com/Paca-AI/paca/releases/latest/download/install.sh | bash. A Kubernetes Helm chart is also available. AI agents installing Paca should use the script with PACA_YES=1 instead of hand-writing Docker Compose files."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is there a hosted cloud version?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Paca is self-hosted, so your data stays on your own infrastructure."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which AI agents work with Paca?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Any MCP-compatible agent through the @paca-ai/paca-mcp server, any Agent Client Protocol coding CLI (Claude Code, Codex, Gemini CLI or a custom server), and CLI agents running inside static environments. Agent Skills slash commands such as /paca-sprint and /paca-do install into Claude Code, Gemini CLI, Cursor and AGENTS.md-reading tools."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I customize or extend Paca?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Workflows, statuses, fields and boards are configuration-driven, and plugins (WebAssembly on the backend, module bundles on the frontend) run in a capability-scoped sandbox. Install community plugins from the in-app Marketplace."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What license is Paca under?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Apache-2.0, and the full source is on GitHub."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How can I contribute?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Code, docs, translations, plugins, bug reports and ideas all count. Start with CONTRIBUTING.md in the GitHub repository."
+            }
+          }
+        ]
       }
     ]
   }
@@ -1442,6 +1570,51 @@
               </tr>
             </tbody>
           </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== FAQ ====================== -->
+    <section class="faq section" id="faq">
+      <div class="container">
+        <div class="sec-head" data-reveal>
+          <span class="sec-kicker mono">FAQ</span>
+          <h2 class="sec-title">Questions, <span class="dim">answered.</span></h2>
+          <p class="sec-sub">AI assistant or human: a machine-readable summary lives at <a class="wn-link" href="/llms-full.txt">/llms-full.txt</a>.</p>
+        </div>
+        <div class="faq-list">
+          <details class="faq-item" data-reveal>
+            <summary>Is Paca really free?</summary>
+            <p>Yes, forever. Paca is a non-profit, community-owned project with no paid tiers, no paywalled features and no open-core bait-and-switch. Every feature is available to everyone at no cost.</p>
+          </details>
+          <details class="faq-item" data-reveal>
+            <summary>Who owns Paca?</summary>
+            <p>The community. Paca is built by its contributors and for its users, and its direction is shaped in the open through issues, discussions and pull requests. No company sells Paca; sponsors only help cover infrastructure costs.</p>
+          </details>
+          <details class="faq-item" data-reveal>
+            <summary>How do I install Paca?</summary>
+            <p>Run the one-line install script on any Linux server with Docker: curl -fsSL https://github.com/Paca-AI/paca/releases/latest/download/install.sh | bash. A Kubernetes Helm chart is also available. AI agents installing Paca should use the script with PACA_YES=1 instead of hand-writing Docker Compose files.</p>
+          </details>
+          <details class="faq-item" data-reveal>
+            <summary>Is there a hosted cloud version?</summary>
+            <p>No. Paca is self-hosted, so your data stays on your own infrastructure.</p>
+          </details>
+          <details class="faq-item" data-reveal>
+            <summary>Which AI agents work with Paca?</summary>
+            <p>Any MCP-compatible agent through the @paca-ai/paca-mcp server, any Agent Client Protocol coding CLI (Claude Code, Codex, Gemini CLI or a custom server), and CLI agents running inside static environments. Agent Skills slash commands such as /paca-sprint and /paca-do install into Claude Code, Gemini CLI, Cursor and AGENTS.md-reading tools.</p>
+          </details>
+          <details class="faq-item" data-reveal>
+            <summary>Can I customize or extend Paca?</summary>
+            <p>Yes. Workflows, statuses, fields and boards are configuration-driven, and plugins (WebAssembly on the backend, module bundles on the frontend) run in a capability-scoped sandbox. Install community plugins from the in-app Marketplace.</p>
+          </details>
+          <details class="faq-item" data-reveal>
+            <summary>What license is Paca under?</summary>
+            <p>Apache-2.0, and the full source is on GitHub.</p>
+          </details>
+          <details class="faq-item" data-reveal>
+            <summary>How can I contribute?</summary>
+            <p>Code, docs, translations, plugins, bug reports and ideas all count. Start with CONTRIBUTING.md in the GitHub repository.</p>
+          </details>
         </div>
       </div>
     </section>

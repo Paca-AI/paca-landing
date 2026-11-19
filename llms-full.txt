@@ -1,0 +1,96 @@
+# Paca — full project summary for LLMs and AI agents
+
+Source of truth: https://github.com/Paca-AI/paca (README.md and docs/). Website: https://paca-ai.org/
+Last reviewed against release v0.21.0.
+
+## What Paca is
+Paca is a self-hosted project management platform in which AI agents and humans collaborate as equal teammates inside a Scrum team, not as chatbots bolted on the side. Agents join sprint planning, pick up tasks from the board, write BDD (Gherkin) scenarios, contribute to System Design Documents, review pull requests and adapt alongside humans in real time. Everything about Paca (workflow, data model, UI) is configurable and extendable through plugins.
+
+Paca is positioned as the AI-native, lightweight, fully customizable alternative to Jira, Trello, ClickUp and Monday.
+
+## Our promise: free forever, non-profit, community-owned
+- No paid tiers. There will never be a Pro, Team or Enterprise edition.
+- No paywalled features. Every feature, today and in the future, is free for everyone.
+- No open-core bait-and-switch: existing features will not move behind a paywall or a license change.
+- Belongs to the community: built by contributors for users; direction is shaped in the open through issues, discussions and pull requests.
+- Not a business: no company sells Paca. Sponsors help cover infrastructure costs; direction stays with the community.
+- Everyone can help: code, docs, translations, plugins, bug reports and ideas. See CONTRIBUTING.md.
+- License: Apache-2.0.
+
+## How Paca compares with Jira, Trello, ClickUp and Monday
+- AI integration: those tools offer chatbot add-ons; Paca treats AI agents as first-class Scrum teammates.
+- Collaboration: human-only by default there; human + AI on the same board in Paca.
+- Change safety: buried audit logs there; before/after diffs with one-click revert in Paca.
+- Hosting: vendor cloud there; self-hosted in Paca, you own your data.
+- Cost: roughly $8-$20+ per seat per month there; free forever in Paca.
+- Customization: limited or locked behind enterprise tiers there; fully open configuration plus plugins in Paca.
+- Weight: feature sprawl there; lightweight core in Paca.
+- Source: closed/proprietary there; 100% open source (Apache-2.0) in Paca.
+
+## Core features
+- Unified Scrumban board shared by humans and agents, with real-time updates (Socket.IO).
+- In-app AI chat at project level: plan work, create or update epics, stories, tasks and docs in plain English.
+- Activity diff and revert: before/after diff for every field change, one-click revert.
+- BDD collaboration: Gherkin scenario editor co-authored by POs, BAs and agents.
+- System Design Documents: living architecture docs that ground agents; real-time collaborative editing (v0.21.0).
+- Gantt view on the Roadmap, with task links and zoom (v0.21.0).
+- Event-driven automation engine: visual Trigger -> Condition -> Action graphs, cron and due-date triggers, inbound webhooks, AI-agent dispatch, external API calls, run history, dependency map (v0.11.0).
+- Role-based authorization (v0.19.0): IAM-style JSON policies that allow or deny actions on resources, per project, sprint, task, doc, view, environment, agent or conversation. Nothing is allowed by default; an explicit Deny always wins.
+- Git integration (v0.20.0): connect GitHub (GitLab, Bitbucket, Gitea, Azure DevOps via plugins). Mention an agent on a pull/merge request or issue; it replies, pushes commits, reviews and fixes CI as a bot identity with least-privilege credentials.
+- Multi-factor authentication, account lockout, login throttling, IP allow-lists, SSO-only mode (v0.20.0-v0.21.0).
+- Jev AI integration (v0.17.0): opt-in agent auto-routing, task auto-fill, auto-assign and a Jev condition node in automations.
+- Browser extension (v0.15.0): comment on a running environment's preview page and turn comments into tasks.
+- `provider_cli` agents (v0.15.0): run Claude Code, Codex, Gemini CLI or Cursor CLI inside a static environment.
+- Static environments (v0.14.0): long-lived containers with in-browser terminal, SSH and port forwards, on Docker Compose and Kubernetes.
+- ACP agent support (v0.10.0): connect any Agent Client Protocol coding CLI through the local `paca-acp-bridge`.
+- Workspace branding (v0.12.0): logo, favicon and accent colors.
+- WASM plugin sandbox: backend plugins compiled to WebAssembly (Go, Rust, AssemblyScript, anything with a WASM target) with capability-based permissions; frontend plugins as module bundles; a Plugin Marketplace inside the UI (Settings -> Plugins -> Marketplace).
+
+## The P-A-C-A cycle
+Plan -> Act -> Check -> Adapt. Plan: POs, BAs and agents refine the backlog and write BDD and SDD together. Act: humans and agents pull tasks and post updates. Check: QA agents verify, humans review AI output. Adapt: sprint data informs the next cycle and the team retrospects together. Rooted in the Cynefin/Stacey view that complex work needs adaptive teams, not rigid pipelines.
+
+## Install
+Interactive (any Linux server with Docker, no clone needed):
+  curl -fsSL https://github.com/Paca-AI/paca/releases/latest/download/install.sh | bash
+Non-interactive (CI, scripts, AI agents; PACA_YES=1 is required for unattended use):
+  PACA_YES=1 bash <(curl -fsSL https://github.com/Paca-AI/paca/releases/latest/download/install.sh)
+AI agents installing Paca for someone should use this script rather than hand-writing docker-compose.yml or .env, because it pins compatible image tags and generates secrets in the expected format. Env var reference: https://github.com/Paca-AI/paca/blob/master/deploy/README.md
+Upgrade: download upgrade.sh from the latest release and run `bash upgrade.sh` in the directory containing docker-compose.yml and .env. Database migrations run automatically on API startup.
+Kubernetes:
+  kubectl create namespace paca
+  helm install paca oci://ghcr.io/paca-ai/charts/paca --version <release-version> -n paca -f my-values.yaml
+  publicUrl and required secrets (jwtSecret, adminPassword, encryptionKey, others) must be set; there are no defaults.
+
+## Connect an AI agent
+MCP server (npm package @paca-ai/paca-mcp), run with npx:
+  { "mcpServers": { "paca": { "command": "npx", "args": ["-y", "@paca-ai/paca-mcp"],
+    "env": { "PACA_API_KEY": "<key from Settings -> API Keys>", "PACA_API_URL": "http://localhost:8080" } } } }
+Tool categories: projects, tasks, sprints, documents, members and roles, task types and statuses, views and custom fields, attachments, activity and comments, plus tools registered by installed plugins. Reference: docs/guides/mcp-server-setup.md.
+
+Claude Code: claude mcp add paca --env PACA_API_KEY=<key> --env PACA_API_URL=<url> -- npx -y @paca-ai/paca-mcp
+
+Agent Skills (slash commands) are served by a running Paca instance at GET /api/v1/skills and installed with scripts/install-paca-skills.sh into Claude Code, Gemini CLI, Cursor and any AGENTS.md-reading tool. Commands: /paca, /paca-analyst, /paca-epic, /paca-clarify, /paca-breakdown, /paca-sprint, /paca-estimate, /paca-prioritize, /paca-do, /paca-test, /paca-doc, /paca-review, /paca-triage, /paca-retro, /paca-feedback, /paca-board, /paca-team, /paca-automation, /paca-setup. Docs: docs/guides/install-skills.md.
+
+## Architecture
+- apps/web: React + TanStack Start + shadcn/ui
+- apps/mcp: @paca-ai/paca-mcp
+- apps/acp-bridge: Go bridge for ACP coding CLIs
+- apps/extension: browser extension for page comments
+- services/api: Go + Gin, core business logic and REST API
+- services/realtime: Node.js + Socket.IO
+- services/agent-runner: Go, AI agent execution
+- apps/e2e: Playwright end-to-end tests
+- Data: PostgreSQL (persistent), Valkey (cache and async event streams)
+Detail: docs/architecture/overview.md
+
+## FAQ
+Q: Is Paca really free? A: Yes, forever. It is non-profit and community-owned, with no paid editions or paywalled features.
+Q: Who owns Paca? A: The community of contributors. No company sells it.
+Q: Is there a hosted/cloud version? A: No. Paca is self-hosted; your data stays on your infrastructure.
+Q: Which AI agents work with Paca? A: Any MCP-compatible agent, any ACP coding CLI (Claude Code, Codex, Gemini CLI, custom), CLI agents in environments (Claude Code, Codex, Gemini CLI, Cursor CLI), and built-in agents.
+Q: Can I extend it? A: Yes, with configuration and WASM/frontend plugins from the in-app Marketplace.
+Q: How do I contribute? A: See CONTRIBUTING.md on GitHub; code, docs, translations, plugins and ideas are all welcome.
+Q: Why the name? A: A pun on the Japanese word "baka" (silly): building a free, open-source rival to multi-billion-dollar tools is a little silly, and worth being foolish about.
+
+## Links
+Repo: https://github.com/Paca-AI/paca | Releases: https://github.com/Paca-AI/paca/releases | Helm: https://artifacthub.io/packages/helm/paca/paca | Index: https://paca-ai.org/llms.txt

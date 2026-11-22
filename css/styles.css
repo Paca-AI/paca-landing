@@ -2026,6 +2026,12 @@ body.menu-open .mobile-menu { display: flex; }
     rgba(255, 255, 255, 0.018);
 }
 .wn-card-new:hover { border-color: rgba(158, 217, 87, 0.34); }
+/* Latest release spans the full row; its highlights sit side by side. */
+.wn-card-feature { grid-column: 1 / -1; }
+@media (min-width: 860px) {
+  .wn-card-feature .jev-list { flex-direction: row; gap: 28px; }
+  .wn-card-feature .jev-list li { flex: 1; }
+}
 .wn-new {
   display: inline-block;
   margin-left: 6px;

@@ -1,7 +1,7 @@
 # Paca — full project summary for LLMs and AI agents
 
 Source of truth: https://github.com/Paca-AI/paca (README.md and docs/). Website: https://paca-ai.org/
-Last reviewed against release v0.21.0.
+Last reviewed against release v0.22.0.
 
 ## What Paca is
 Paca is a self-hosted project management platform in which AI agents and humans collaborate as equal teammates inside a Scrum team, not as chatbots bolted on the side. Agents join sprint planning, pick up tasks from the board, write BDD (Gherkin) scenarios, contribute to System Design Documents, review pull requests and adapt alongside humans in real time. Everything about Paca (workflow, data model, UI) is configurable and extendable through plugins.
@@ -34,6 +34,9 @@ Paca is positioned as the AI-native, lightweight, fully customizable alternative
 - BDD collaboration: Gherkin scenario editor co-authored by POs, BAs and agents.
 - System Design Documents: living architecture docs that ground agents; real-time collaborative editing (v0.21.0).
 - Gantt view on the Roadmap, with task links and zoom (v0.21.0).
+- Unified documentation and files (v0.22.0): documents and uploaded files in one drive-style tree with folders, rename/move, concurrent uploads and live file updates.
+- Note view (v0.22.0): a view that holds a single document, manageable over MCP.
+- Signed-in devices (v0.22.0): list and revoke the devices signed in to an account.
 - Event-driven automation engine: visual Trigger -> Condition -> Action graphs, cron and due-date triggers, inbound webhooks, AI-agent dispatch, external API calls, run history, dependency map (v0.11.0).
 - Role-based authorization (v0.19.0): IAM-style JSON policies that allow or deny actions on resources, per project, sprint, task, doc, view, environment, agent or conversation. Nothing is allowed by default; an explicit Deny always wins.
 - Git integration (v0.20.0): connect GitHub (GitLab, Bitbucket, Gitea, Azure DevOps via plugins). Mention an agent on a pull/merge request or issue; it replies, pushes commits, reviews and fixes CI as a bot identity with least-privilege credentials.
